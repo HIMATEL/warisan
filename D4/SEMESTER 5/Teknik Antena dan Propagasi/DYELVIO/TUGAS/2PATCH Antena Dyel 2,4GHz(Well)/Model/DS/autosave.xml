@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SchematicTopology Version="2.3" Seed="1" Grid="25">
+    <BasePath>E:/Dyelvio/1NK/Sem 5/Antena/2PATCH Antena Dyel 2,4GHz(Well)/Model/DS</BasePath>
+    <Block ForeignId="377780863" Id="1" Class="MWSSCHEM">
+        <Size Height="150" Width="150"/>
+        <Pins>
+            <Pin X="-75" Y="0" Index="0" BlockPosition="Left">
+                <Label>1</Label>
+            </Pin>
+        </Pins>
+        <Image Scale="AutoFit" FileName="../3D/Model.dib"/>
+        <Pos X="75" Y="75"/>
+        <Appearance Level="Foreground">
+            <Pen Style="SolidLine" Color="#ff000000" Width="1" Cosmetic="1"/>
+            <Brush Style="NoBrush" Color="#ff000000"/>
+        </Appearance>
+        <Appearance Level="Background">
+            <Pen Style="NoPen" Color="#ff000000" Width="1" Cosmetic="1"/>
+            <Brush Style="SolidPattern" Color="#ffffffff"/>
+        </Appearance>
+        <ToolTip>CST MICROWAVE STUDIO schematic block MWSSCHEM1</ToolTip>
+    </Block>
+</SchematicTopology>

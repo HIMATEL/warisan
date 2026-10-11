@@ -1,0 +1,59 @@
+{
+    "parameters": [
+        {
+            "descr": "Lebar Ground",
+            "expr": "59",
+            "name": "Wg",
+            "value": "59"
+        },
+        {
+            "descr": "Panjang Ground",
+            "expr": "51.37",
+            "name": "Lg",
+            "value": "51.37"
+        },
+        {
+            "descr": "Tebal Ground",
+            "expr": "0.035",
+            "name": "t",
+            "value": "0.035"
+        },
+        {
+            "descr": "Tebal Subtract",
+            "expr": "1.6",
+            "name": "h",
+            "value": "1.6"
+        },
+        {
+            "descr": "Lebar patch",
+            "expr": "49.5",
+            "name": "W",
+            "value": "49.5"
+        },
+        {
+            "descr": "Panjang Feed",
+            "expr": "6.2",
+            "name": "Lf",
+            "value": "6.2"
+        },
+        {
+            "descr": "Panjang Patch",
+            "expr": "41",
+            "name": "L",
+            "value": "41"
+        },
+        {
+            "descr": "Lebar Feed",
+            "expr": "6.7",
+            "name": "Wf",
+            "value": "6.7"
+        },
+        {
+            "descr": "Lebar Inset",
+            "expr": "1.5",
+            "name": "Gpf",
+            "value": "1.5"
+        }
+    ],
+    "version": 1
+}

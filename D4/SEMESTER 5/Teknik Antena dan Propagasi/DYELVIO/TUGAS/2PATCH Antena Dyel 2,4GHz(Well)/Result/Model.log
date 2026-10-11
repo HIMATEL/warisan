@@ -1,0 +1,208 @@
+09/Nov/2023 23:07:26  Defined reference frequency for open boundary condition (2.35 GHz) is larger
+                      than the lowest relevant system frequency (monitor at 2 GHz).
+                      Please check open boundary settings to ensure accurate monitor results for the
+                      lowest frequency of interest.
+                      
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:07:26  *** Warning ***
+                      
+                      The monitor h-field (f=3) is outside simulation frequency range and will be
+                      ignored.
+                      
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:07:26  *** Warning ***
+                      
+                      The monitor e-field (f=3) is outside simulation frequency range and will be
+                      ignored.
+                      
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:07:26  *** Warning ***
+                      
+                      The monitor h-field (f=2) is outside simulation frequency range and will be
+                      ignored.
+                      
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:07:26  *** Warning ***
+                      
+                      The monitor e-field (f=2) is outside simulation frequency range and will be
+                      ignored.
+                      
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:07:26  *** Warning ***
+                      
+                      The monitor farfield (f=2) is outside the simulation frequency range and will
+                      be ignored.
+                      
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:07:26  *** Warning ***
+                      
+                      The monitor farfield (f=3) is outside the simulation frequency range and will
+                      be ignored.
+                      
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:07:43  The following farfield monitor(s) have been adjusted to model box [-30.4774,
+                      90.4774, -16.7179, 52.3471, -1.3356, 4.65465].
+                        farfield (f=2), farfield (f=2.4), farfield (f=2.5), farfield (f=3)
+                      
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:07:43  
+                      Solver started at: 11:07 PM Thursday, 09. November 2023 (SE Asia Standard Time)
+                      
+                        Module:  Time Domain: S-Parameter (Win 64)
+                        Version: 2019.0 Release from 2018-09-20 (change 633648)
+                      
+
+                      ------------------------------------------------------------------------------
+
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:07:43  ======================================================================
+                       Solver cycle: 1
+                      ======================================================================
+                      
+                      Stimulation at port 1 (mode 1) 
+                      
+                      
+                      
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:07:43  Units settings: 
+                      
+                        Dimensions: mm
+                        Frequency:  GHz
+                        Time:       ns
+                      
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:08:10  Mesh statistics:
+                      
+                         Hexahedral mesh type: PBA [Version: default]
+                      
+                         Parallelization type: domain decomposition
+                            Number of parallel working threads: 2
+                            Number of calculation domains used: 2
+                      
+                         Used point accuracy enhancement value: 75.00%.
+                         Used point accuracy enhancement value: 69.00%.
+                         PBA fill limit: 99.00% (inverse)
+09/Nov/2023 20:40:41     current system memory usage reached 60%
+09/Nov/2023 20:40:42     current system memory usage reached 60%
+                         Used point accuracy enhancement value: 68.00%.
+                         Used point accuracy enhancement value: 72.00%.
+09/Nov/2023 20:55:32     current system memory usage reached 55%
+                         Used point accuracy enhancement value: 73.00%.
+                         Used point accuracy enhancement value: 71.00%.
+                         Used point accuracy enhancement value: 67.00%.
+                         Used point accuracy enhancement value: 65.00%.
+                         Used point accuracy enhancement value: 66.00%.
+
+09/Nov/2023 23:08:11  Using generalized port mode solver.
+                      
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:08:12  Port mode solver: Detected dispersive material(s) at port 1. 
+                      Using a constant approximation of dispersive material(s) at 2.35 GHz and neglecting loss terms.  More...
+                      
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:08:12  Boundary conditions: 
+                      
+                        YZsymmetry: none
+                        XZsymmetry: none
+                        XYsymmetry: none
+                      
+                        Xmin: expanded open, 4 Layer, depth 27.5156 mm
+                        Xmax: expanded open, 4 Layer, depth 27.5156 mm
+                      
+                        Ymin: expanded open, 4 Layer, depth 30.3029 mm
+                        Ymax: expanded open, 4 Layer, depth 27.4374 mm
+                      
+                        Zmin: expanded open, 4 Layer, depth 25.7767 mm
+                        Zmax: expanded open, 4 Layer, depth 29.6376 mm
+                      
+                        PML-Type: Convolution PML
+                      
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:08:12  Frequency settings: 
+                      
+                        Fmin:         2.2
+                        Fmax:         2.5
+                        Nfsteps(lin): 1001
+                      
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:08:12  Waveguide boundaries:
+                      
+09/Nov/2023 23:08:12  Port: 1
+                      
+09/Nov/2023 23:08:12    ------------------------------- F-Calc 2.35 --------------------------------
+                        Port   Mode   Type        Z-Wave        Z-Wave-Sigma  Z-Line        F-Cutoff
+                        1      1      QTEM        260           6.43e-008     40            ---
+                        ----------------------------------------------------------------------------
+                      
+09/Nov/2023 23:08:12  Field update statistics:
+                      
+                        Number of components in total: 	520489
+                        Number of TST elements:		213
+                        Number of lossy metal components:	13968
+                        Number of disp. elements:		12998
+                      
+                      Subcycling state:      Automatically deactivated
+                      
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:10:20  
+                      --------------------------------------------------------------------------------
+09/Nov/2023 23:10:20  Steady state energy criterion met, solver finished successfully.
+                      
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:10:20  Frequency domain results normalized to default signal.
+                      
+                      
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:10:20  
+                        ----------------------------------------------------------------------------
+                                            Peak memory used (kB)         Free physical memory (kB) 
+                                                                          At begin     Minimum      
+                        ----------------------------------------------------------------------------
+                        Matrices calc.      159613                        7113281      7034179      
+                        Solver run total    83772                         7202560      7037568      
+                        ----------------------------------------------------------------------------
+                      
+                      --------------------------------------------------------------------------------
+                      Solver Statistics:
+                      
+                        Hardware:
+                           Computer name:                 	DESKTOP-O1PV301 
+                      
+                           Number of CPU threads:               2
+                           Hardware info:                  	Hardware Accelerator Device not activated
+                      
+                        Number of mesh cells:             	83300
+                        Excitation duration:              	2.36969917e+001 ns 
+                        Calculation time for excitation:  	110 	s
+                        Number of calculated pulse widths:	1.12712 
+                        Steady state accuracy limit:      	-40	dB 
+                        Simulated number of time steps:   	21008 
+                        Maximum number of time steps:     	372774 
+                        Time step width:
+                           without subcycles:             	1.27138483e-003 ns
+                           used:                          	1.27138483e-003 ns
+                      
+                        Matrix calculation time:          	26 	s
+                        Solver setup time:                	3 	s
+                        Solver loop time:                 	124 	s
+                        Solver post processing time:      	1 	s
+                                                          	------------
+                        Total solver time:                	154 	s  ( = 0 h, 2 m, 34 s )
+                      
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:10:20  
+                        Adaptive port meshing time:          	17     	s
+                        Total solver time (all cycles):      	154    	s  ( = 0 h, 2 m, 34 s )
+                        solver initialization and clean-up:  	3      	s
+                                                             	------------
+                        Total simulation time:               	174    	s  ( = 0 h, 2 m, 54 s )
+                      
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:10:20  Solver finished at: 11:10 PM Thursday, 09. November 2023
+                      
+                      
+                      
+                      ------------------------------------------------------------------------------
+09/Nov/2023 23:10:23  Creating parametric 1D results for Run ID 7
+                      
+                      ------------------------------------------------------------------------------

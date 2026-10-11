@@ -1,0 +1,21 @@
+[Version]
+2
+[ProjectVersion]
+'# MWS Version: Version 2019.0 - Sep 20 2018 - ACIS 28.0.2 -
+[Author]
+Admin
+[Mesh Cells]
+107,692
+[Mesh Type]
+Hexahedral
+[Last Problem Type]
+High Frequency
+[Last Solver Type]
+HF Time Domain
+[Last Solver Type Abb]
+t
+[Results]
+Time Domain: S-Parameter
+[Modeler Unique ID]
+5:antena elsa.cst?0bd1e0d0c095ee55ff3b29323da0c4c3?13428:numberofparameters=11:port=1>mode=1>zre=0>zim=0:::gpf?l?lf?h?lg?t?w?wf?wg?x?y
+[Comment]

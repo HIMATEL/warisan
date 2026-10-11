@@ -1,0 +1,77 @@
+{
+    "parameters": [
+        {
+            "descr": "lebar ground",
+            "expr": "49,128",
+            "name": "wg",
+            "value": "49.128"
+        },
+        {
+            "descr": "panjang ground",
+            "expr": "42,485",
+            "name": "lg",
+            "value": "42.485"
+        },
+        {
+            "descr": "tebal ground",
+            "expr": "0.035",
+            "name": "t",
+            "value": "0.035"
+        },
+        {
+            "descr": "tebal substrat",
+            "expr": "1.6",
+            "name": "h",
+            "value": "1.6"
+        },
+        {
+            "descr": "lebar patch",
+            "expr": "39,528",
+            "name": "w",
+            "value": "39.528"
+        },
+        {
+            "descr": "panjang feed",
+            "expr": "10",
+            "name": "Lf",
+            "value": "10"
+        },
+        {
+            "descr": "panjang patch",
+            "expr": "32,885",
+            "name": "L",
+            "value": "32.885"
+        },
+        {
+            "descr": "lebar feed",
+            "expr": "4",
+            "name": "wf",
+            "value": "4"
+        },
+        {
+            "descr": "Lebar inset",
+            "expr": "1.2",
+            "name": "Gpf",
+            "value": "1.2"
+        },
+        {
+            "descr": "lebar feed 50",
+            "expr": "4",
+            "name": "x",
+            "value": "4"
+        },
+        {
+            "descr": "panjang feed 50",
+            "expr": "15",
+            "name": "y",
+            "value": "15"
+        },
+        {
+            "descr": "tmbhn gnd",
+            "expr": "10.3",
+            "name": "gnd",
+            "value": "10.3"
+        }
+    ],
+    "version": 1
+}
