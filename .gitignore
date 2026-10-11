@@ -1,0 +1,22 @@
+# OS & System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Heavy binaries & large media exceeding GitHub limits (>95MB)
+*.iso
+*.ISO
+*.ghost
+*.bin
+*.image
+*.mp4
+*.zip
+
+# Temp files
+*.tmp
+*~
