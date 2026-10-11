@@ -1,0 +1,9 @@
+https://www.kaggle.com/datasets/balaka18/email-spam-classification-dataset-csv/
+
+https://www.kaggle.com/datasets/ananthr1/weather-prediction
+
+https://www.kaggle.com/datasets/hasibullahaman/traffic-prediction-dataset
+
+https://www.kaggle.com/datasets/tawfikelmetwally/employee-dataset
+
+https://www.kaggle.com/datasets/uom190346a/water-quality-and-potability
