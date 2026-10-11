@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=HitungNFaktorialNonrekursif
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=n
+comment2.target=int\ Factorial(int)
+numComments=3

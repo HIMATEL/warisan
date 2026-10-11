@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=L03_06
+comment1.params=k\ l
+comment1.target=java.lang.String[][]\ inputMatrix(int,\ int)
+comment2.params=x
+comment2.target=void\ cetakMatrix(java.lang.String[][])
+comment3.params=args
+comment3.target=void\ main(java.lang.String[])
+numComments=4

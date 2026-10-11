@@ -1,0 +1,14 @@
+n = 0:50;
+f = 0.08;
+phase = pi/2;
+A = 2.5;
+arg = 2*pi*f*n - phase;
+x = A*cos(arg);
+clf;
+stem(n,x);
+axis([0 50 -3 3]);
+grid;
+title('Deretan Sinusoidal');
+xlabel('Waktu n');
+ylabel('Amplitudo');
+axis;

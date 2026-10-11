@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=HitungNPangkatRekursif
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=n\ power
+comment2.target=int\ pangkat(int,\ int)
+numComments=3

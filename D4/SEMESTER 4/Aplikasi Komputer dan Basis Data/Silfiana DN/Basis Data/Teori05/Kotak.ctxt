@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Kotak
+comment1.params=p\ l
+comment1.target=Kotak(int,\ int)
+comment2.params=
+comment2.target=int\ hitungLuas()
+comment3.params=args
+comment3.target=void\ main(java.lang.String[])
+numComments=4

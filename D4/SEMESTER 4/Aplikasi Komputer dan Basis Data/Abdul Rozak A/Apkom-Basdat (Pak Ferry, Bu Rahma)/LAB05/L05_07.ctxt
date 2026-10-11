@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=L05_07
+comment1.params=l\ m\ n\ o
+comment1.target=void\ inputArray(java.lang.String[],\ double[],\ double[],\ double[])
+comment2.params=x\ l\ m\ n\ o
+comment2.target=void\ satukan(java.lang.String[],\ java.lang.String[],\ double[],\ double[],\ double[])
+comment3.params=m\ x
+comment3.target=void\ selectSort(double[],\ java.lang.String[])
+comment4.params=o
+comment4.target=void\ cetak(java.lang.String[])
+comment5.params=args
+comment5.target=void\ main(java.lang.String[])
+numComments=6

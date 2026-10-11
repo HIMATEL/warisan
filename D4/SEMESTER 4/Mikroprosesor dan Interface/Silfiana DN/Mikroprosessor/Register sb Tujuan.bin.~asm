@@ -1,0 +1,3 @@
+MOV BX, 24
+MOV SP,BX
+

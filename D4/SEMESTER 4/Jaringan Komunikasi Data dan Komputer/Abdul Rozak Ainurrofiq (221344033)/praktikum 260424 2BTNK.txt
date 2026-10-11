@@ -1,0 +1,99 @@
+selama praktikum, kita sudah belajar mengenai:
+1. Konfigurasi Dasar
+- set hostname
+- set username dan password
+- set enable secret
+- set ip domain name
+- set banner
+- set interface fisik
+- set interface logic
+- set line console
+- set line remote (vty) => telnet dan ssh
+
+2. Konfigurasi VLAN
+3. Konfigurasi Access dan Trunking
+4. Konfiugrasi INTERVLAN ROUTING => Router on stick
+5. Spanning Tree Protocol
+6. VTP (VLAN TRUNKING PROTOCOL)
+7. Konfigurasi Etherchannel
+8. Konfiugrasi INTERVLAN ROUTING => Multilayer SWITCH
+
+9. ROUTING 
+
+CARA MELIHAT ROUTING TABLE:
+1) PADA CISCO ==> SHOW IP ROUTE
+
+CARA MEMBUAT ROUTING STATIC:
+### MENGKONFIGURASI INTERFACE POINT-TO-POINT ###
+## POINT-TO-POINT ANTAR ROUTER (R1) dan MLS (CORE SW) ##
+R1:
+>enable
+#config terminal
+(config)# interface Gig0/1
+(config-if)# ip address 123.123.123.1 255.255.255.252
+(config-if)# no shutdown
+
+MLS (CORE_SW):
+>enable
+#config terminal
+(config)# interface Gig0/1
+(config-if)# no switchport
+(config-if)# ip address 123.123.123.2 255.255.255.252
+(config-if)# no shutdown
+
+VERIFIKASI: 
+1. PING IP POINT-TO-POINT 
+R1     : ping 123.123.123.2
+CORE SW: ping 123.123.123.1
+
+### KONFIGURASI ROUTING STATIC ###
+ada 2 cara dalam mengkonfigurasi routing static:
+1. menggunakan next hop address => ip tetangga:
+(config)# ip route <dest ip> <subnet mask> <next hop>
+
+2. menggunakan exit interface => interface diri sendiri
+(config)# ip route <dest ip> <subnet mask> <exit interface>
+
+GOALS:
+VLAN 10 <-> VLAN 30
+R1 (VLAN 10) --> MLS (VLAN 30):
+konfigurasi pada R1:
+(config)# ip route 192.168.30.0 255.255.255.0 123.123.123.2
+
+MLS (VLAN 30) --> R1 (VLAN 10):
+konfigurasi pada MLS: 
+(config)# ip route 192.168.10.0 255.255.255.0 123.123.123.1 
+
+VERIFIKASI : 
+1. VLAN 10 <-> VLAN 30 ==> 
+ping dari PC pada VLAN 10 ke PC pada VLAN 30
+misal: PC0 (192.168.10.10) -> PC-A (192.168.30.10)
+
+VLAN 10 <-> VLAN 40
+VLAN 20 <-> VLAN 30
+VLAN 20 <-> VLAN 40
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

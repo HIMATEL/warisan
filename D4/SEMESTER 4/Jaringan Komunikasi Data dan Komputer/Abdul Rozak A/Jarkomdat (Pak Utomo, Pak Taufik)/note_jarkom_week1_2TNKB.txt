@@ -1,0 +1,201 @@
+=========================================
+### PENGENALAN MODE ###
+ada 3 mode dalam perangkat CISCO
+1. "switch>" = user mode
+2. "switch#" = privilage mode (mode enable)
+3. "switch(config) = configure mode
+
+dari user mode ke privilage mode, gunakan:
+switch> enable
+switch#
+
+dari privilage mode ke configure mode, gunakan:
+switch# configure terminal
+switch(config)#
+
+ada sistem hirarki:
+user mode -> privilage mode -> configure mode
+
+kalau mau mundur, gunakan command "exit"
+=========================================
+### PENGENALAN ERROR ###
+Ada 2 jenis error:
+1. pada mode configure:
+-----------------------------------------
+Switch(config)#misalvtp
+                ^
+% Invalid input detected at '^' marker.
+-----------------------------------------
+pada contoh 1, akan ada marked yang menunjukan lokasi error
+
+2. pada mode user dan privilage
+-----------------------------------------
+Switch#nono
+Translating "nono"...domain server (255.255.255.255)
+% Unknown command or computer name, or unable to find computer address
+-----------------------------------------
+pada contoh 2, perangkat akan melalukan name lookup ke server untuk mencari command tsb.
+
+solusi untuk error contoh 2:
+1) intrupt command dengan tekan:
+"ctrl"+"shift"+6"
+
+2) matikan fungsi lookup:
+switch(config)#no ip domain-lookup
+============================================
+KONFIGURASI DASAR (5):
+Harus dilakukan di mode configure:
+switch(config):
+-----------------------------------------------
+1. Set Hostname: memberikan nama pada perangkat
+(config)# hostname <nama hostname>
+
+contoh:
+switch(config)# hostname SW_1
+SW_1(config)#
+
+catatan: sebagai rekomen best practice, untuk penulisan nama, deskripsi, dsb sebaiknya huruf kapital semua, agar tidak tertukar dengan command
+-----------------------------------------------
+2. Set Username/Password
+cara 1: menggunakan password (password 7)
+(config)# username <nama user> password <password>
+
+contoh:
+SW_1(config)# username admin password admin
+
+cara 2: menggunakan secret (md5)
+(config)# username <nama user> secret <password>
+
+contoh:
+SW_1(config)# username admin password admin
+
+verifikasi:
+bisa melihat seluruh konfigurasi dengan command:
+"#show running-config"              => di mode enable
+"(config)# do show running-config"  => di mode config
+-----------------------------------------------
+3. Set service password encrypt (optional ketika menggunakan secret)
+SW_1(config)# service password-encryption
+
+verifikasi:
+bisa melihat seluruh konfigurasi dengan command:
+"#show running-config"              => di mode enable
+"(config)# do show running-config"  => di mode config
+-----------------------------------------------
+4. Set line Console Password : digunakan set keamaan pada console
+
+(config)# line console 0
+(config-line)#
+
+ada 2 cara:
+1. Gunakan informasi user/name pada tahap 2.
+(config)# line console 0
+(config-line)# login local
+
+2. Gunakan command password untuk set password console
+(config)# line console 0
+(config-line)# password <nama password>
+(config-line)# login
+-----------------------------------------------
+5. Set Enable Password : setting password untuk masuk ke mode privilage (enable)
+
+(config)# enable secret <password>
+
+contoh:
+(config)# enable secret admin
+-----------------------------------------------
+6. Set Banner : setting Banner Masuk
+(config)# banner motd " <bannner> "
+(config)# banner motd * <bannner> *
+(config)# banner motd % <bannner> %
+
+contoh:
+(config)# banner motd "Selamat Datang, yang tidak berkepentingan Dilarang Masuk!"
+-----------------------------------------------
+6. Set Interface Fisik
+
+sebelum memulai, pertama kita bisa melakukan cek pada status interface:
+
+Cek interface layer 2 (yang akan muncul hanya interface fisik)
+#show interface status  => mode privilage
+(config)#do show interface status => mode config
+
+Cek VLAN Status
+#show vlan brief  => mode privilage
+(config)#do show vlan brief => mode config
+
+Cek interface layer 3 (interface fisik dan logik akan muncul)
+#show ip interface brief  => mode privilage
+(config)#do show ip interface brief => mode config
+
+Status                Protocol 
+up                    up       : kondisi port aktif, dan ada kabel plug in
+down                  down     : kondisi port aktif, tidak ada kabel plug in
+admin down            down     : kondisi port non-aktif oleh admin
+up                    down     : error
+down                  up       : error
+
+SETTING INTERFACE:
+1. untuk set interface satuan / single interface
+(config)#interface <nama interface>
+(config-if)#
+
+contoh:
+(config)#interface fa0/1
+(config-if)#
+
+2. untuk set interface banyak (range)/ range interface
+(config)# interface range <nama interface awal> / <akhir>
+
+contoh:
+(config)#interface range fa0/1-12
+(config-if-range)#
+
+config interface fa0/1-12 dengan vlan 10
+(config)#interface range fa0/1-12            => akses interface fa0/1 - fa0/12
+(config-if-range)# switchport mode access    => set interface ke mode akses
+(config-if-range)# switchport access vlan 10 => set interface ke vlan 10
+(config-if-range)# no shutdown               => untuk menyalakan interface
+(config-if-range)# description INT_VL_10     => untuk memberi deskripsi
+
+config interface fa0/13-24 dengan vlan 20
+(config)#interface range fa0/13-24           => akses interface fa0/13 - fa0/24
+(config-if-range)# switchport mode access    => set interface ke mode akses
+(config-if-range)# switchport access vlan 20 => set interface ke vlan 20
+(config-if-range)# no shutdown               => untuk menyalakan interface
+(config-if-range)# description INT_VL_20     => untuk memberi deskripsi
+
+7. Mematikan port yang tidak digunakan
+sebagai catatan:
+default port switch itu aktif, sedangkan
+default port router itu mati
+
+untuk menyalakan port ==> #no shutdown
+untuk mematikan port  ==> #shutdown
+
+#interface range 0/4-12
+(config-if-range)# shutdown
+
+#interface range 0/16-24
+(config-if-range)# shutdown
+
+7. Set Interface Logic (minggu depan)
+8. Set line Virtual (minggu depan)
+
+9. Save (INI HARUS DILAKUKAN) , selama perangkat tidak mati maka konfigurasi tidak akan hilang, namun kalau dimatikan maka akan menghilang
+
+Konfigurasi pada saat nyala     --> running-config ==> NVRAM
+Konfigurasi yang di boot(saved) --> startup-config ==> flash
+
+untuk save ada 2 cara:
+cara 1. save di startup-configuration:
+#copy running-config startup-config
+
+cara 2. save di flash:
+#write
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=L05_01
+comment1.params=m
+comment1.target=void\ inputNamakota(java.lang.String[])
+comment2.params=n
+comment2.target=void\ selectSort(java.lang.String[])
+comment3.params=o
+comment3.target=void\ cetakNamakota(java.lang.String[])
+comment4.params=args
+comment4.target=void\ main(java.lang.String[])
+numComments=5

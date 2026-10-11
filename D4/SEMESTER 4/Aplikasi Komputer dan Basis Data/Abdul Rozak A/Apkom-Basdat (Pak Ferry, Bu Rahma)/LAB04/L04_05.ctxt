@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=L04_05
+comment1.params=
+comment1.target=double\ input()
+comment2.params=a\ t
+comment2.target=double\ hitungLuas(double,\ double)
+comment3.params=args
+comment3.target=void\ main(java.lang.String[])
+numComments=4

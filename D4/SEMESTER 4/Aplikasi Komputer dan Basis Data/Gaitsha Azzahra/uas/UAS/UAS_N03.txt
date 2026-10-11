@@ -1,0 +1,39 @@
+TITLE UAS_N03 ;mengurutkan data unsigned secara ascending
+.MODEL SMALL
+.STACK 100H
+.DATA
+BIL DW 0B841H,0A521H,9355H,7FC2H,0AF23H,0FFDDH,5801H,4A67H,0C5B2H,0DD11H
+    DW 0E232H,1103H,2424H,39ACH,9121H,4211H,0AFC1H,4444H,1700H,1811H
+
+.CODE
+MAIN PROC
+    MOV AX,@DATA
+    MOV DS,AX
+    
+ 
+    MOV CX,19        
+LUP:
+    MOV SI,0
+    MOV DX,CX        
+    
+LUP1:
+    MOV AX,[BIL+SI]
+    MOV BX,[BIL+SI+2]
+    CMP AX,BX
+    JBE SKIP    
+    
+    MOV [BIL+SI],BX
+    MOV [BIL+SI+2],AX
+
+SKIP:
+    ADD SI,2         
+    DEC DX
+    JNZ LUP1
+    
+    DEC CX
+    JNZ LUP
+    
+    MOV AH,4CH
+    INT 21H
+MAIN ENDP
+END MAIN

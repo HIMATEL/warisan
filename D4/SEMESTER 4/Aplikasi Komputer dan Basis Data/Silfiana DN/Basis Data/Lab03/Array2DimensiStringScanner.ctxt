@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Array2DimensiStringScanner
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=b\ k
+comment2.target=java.lang.String[][]\ inputNamaSiswa(int,\ int)
+comment3.params=namaSiswa
+comment3.target=void\ cetakNamaSiswa(java.lang.String[][])
+numComments=4

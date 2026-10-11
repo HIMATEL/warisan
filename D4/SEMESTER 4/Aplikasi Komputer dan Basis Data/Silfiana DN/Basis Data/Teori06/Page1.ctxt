@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Page1
+comment1.params=
+comment1.target=Page1()
+comment2.params=event
+comment2.target=void\ actionPerformef(java.awt.event.ActionEvent)
+comment3.params=e
+comment3.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=4

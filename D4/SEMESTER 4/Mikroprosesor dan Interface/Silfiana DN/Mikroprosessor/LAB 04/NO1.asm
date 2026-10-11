@@ -1,0 +1,52 @@
+TITLE LAB04 NO1
+.MODEL SMALL
+.STACK 100H
+
+.DATA
+BM1 DB 43H, 77H, 50H, 64H, 32H, 44H, 35H, 47H, 47H, 75H
+BM2 DB 37H, 47H, 72H, 51H, 53H, 27H, 35H, 23H, 47H, 72H
+BM3 DB 10 DUP (0)
+BM4 DB 10 DUP (0)
+
+.CODE
+MAIN PROC
+MOV AX,@DATA
+MOV DS,AX
+MOV SI,0
+
+LUP0:MOV AH,0
+ADD AL,[BM1+SI]
+ADD AL,[BM2+SI]
+ADC AH,0
+
+MOV BL,AL
+AND BL,0FH ;di nol kan satuan kiri pada BL
+CMP BL,8H  ; alasan 7 bandingkan apakah lebih dari 7
+JB LUP1
+ADD AX,8
+
+LUP1:MOV BL,AL
+AND BL,0FH
+CMP BL,80 ;harus pake H karena yang boleh tanpa 80 hanya sampai 10
+JB LUP2
+ADD AX,80H
+
+LUP2:MOV [BM3+SI],AL
+MOV [BM4+SI],AH
+
+INC SI
+CMP SI,0AH
+JB LUP0
+
+MOV AH,CH
+INT 21H
+
+MAIN ENDP
+END MAIN
+
+
+
+
+
+
+

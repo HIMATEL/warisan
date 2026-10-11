@@ -1,0 +1,17 @@
+Field-Programmable Gate Array (FPGA) tuh IC digital yang sering 
+digunakan untuk mengimplementasikan rangkaian digital. FPGA tuh bentuknya komponen 
+elektronika dan semikonduktor yang terdiri dari komponen gerbang terprogram 
+(programmable logic) dan sambungan terprogram (interkoneksi).
+Komponen gerbang terprogram mencakup jenis gerbang logika biasa (AND, OR, XOR, NOT) 
+maupun jenis (decoder, adder, subtractor, multiplier, dll).
+ 
+Blok-blok komponen di dalam FPGA bisa juga mengandung elemen memori (register) 
+mulai dari flip-flop sampai pada RAM (Random Access Memory).
+=========================================================================================
+Manipulasi bit adalah tindakan memanipulasi bit atau potongan data yang lebih pendek
+ dari sebuah kata secara algoritmik . #Tugas pemrograman komputer yang memerlukan manipulasi
+ bit termasuk kontrol perangkat tingkat rendah, deteksi kesalahan dan dan pengoptimalan .
+
+Manipulasi bit, di beberapa kasus, bisa meniadakan atau mengurangi 
+kebutuhan untuk mengulang struktur data dan dapat memberikan kecepatan yg lebih/ 
+berlipat ganda, karena manipulasi bit diproses secara paralel.

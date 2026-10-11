@@ -1,0 +1,31 @@
+TITLE L09_01 ;KONVERSI HEKSA 2 DIGIT <-> OKT 2
+.MODEL SMALL
+.STACK 100H
+.DATA
+.CODE
+MAIN PROC
+     MOV AX,@DATA
+     MOV DS,AX 
+     
+     MOV DL,CH
+     CMP DL,7
+     JBE AKH
+     
+     MOV DL,CH
+     AND DL,07H
+     MOV CL,CH
+     MOV CH,0
+     AND CL,0F8H
+     SHL CL,1
+     ADC CH,0
+     ADD DX,CX ;SUDAH DISISIPKAN 1 BIJI 0
+     MOV BX,DX
+     AND BX,0FF80H
+     SHL BX,1H 
+     AND DX,07FH
+     ADD DX,BX  
+AKH:     
+     MOV AH,4CH
+     INT 21H
+     MAIN ENDP
+END MAIN

@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=L05_06
+comment1.params=m\ n
+comment1.target=void\ inputNamaKota(java.lang.String[],\ java.lang.String[])
+comment2.params=l\ m\ n
+comment2.target=void\ satukan(java.lang.String[],\ java.lang.String[],\ java.lang.String[])
+comment3.params=n
+comment3.target=void\ bubbleSort(java.lang.String[])
+comment4.params=o
+comment4.target=void\ cetakNamakota(java.lang.String[])
+comment5.params=args
+comment5.target=void\ main(java.lang.String[])
+numComments=6

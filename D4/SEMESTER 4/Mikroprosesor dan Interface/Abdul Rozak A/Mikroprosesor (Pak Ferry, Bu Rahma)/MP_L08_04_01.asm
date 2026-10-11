@@ -1,0 +1,22 @@
+TITLE L08_04_01
+.MODEL SMALL
+.STACK 100H
+.DATA
+BM1 DW 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+.CODE
+MAIN PROC
+     MOV AX,@DATA
+     MOV DS,AX
+     MOV SI,1
+       
+L0:  ADD BX,1111H
+     MOV [BM1+SI],BX
+
+     INC SI
+     CMP BX,0FFFFH
+     JNZ L0
+        
+     MOV AH,4CH
+     INT 21H
+     MAIN ENDP
+END MAIN

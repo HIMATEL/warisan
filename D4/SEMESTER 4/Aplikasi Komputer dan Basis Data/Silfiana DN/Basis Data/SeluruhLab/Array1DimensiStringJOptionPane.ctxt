@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Array1DimensiStringJOptionPane
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=k
+comment2.target=java.lang.String[]\ inputNegara(int)
+comment3.params=r
+comment3.target=void\ cetakNegara(java.lang.String[])
+numComments=4

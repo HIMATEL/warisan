@@ -1,0 +1,23 @@
+TITLE MEMINDAHKAN 16 DATA 16 BIT
+.MODEL SMALL
+.STACK 100H
+.DATA
+BM DB 16 DUP(0)
+.CODE
+MAIN PROC
+     MOV AX,@DATA
+     MOV DS,AX
+     
+     MOV SI,0
+     MOV DL,0
+     
+LUP: MOV [BM+SI],DL
+     ADD DL,1H
+     INC SI
+     CMP SI,10H
+     JB  LUP
+     
+     MOV AH,4CH
+     INT 21H
+     MAIN ENDP
+END MAIN

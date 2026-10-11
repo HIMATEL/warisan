@@ -1,0 +1,480 @@
+Enter password: ************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database latihan;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| latihan            |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.01 sec)
+
+mysql> drop database latihan;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.00 sec)
+
+mysql> create database Lab10;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| lab10              |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> connect Lab10;
+Connection id:    10
+Current database: Lab10
+
+mysql> create table No1 (nama_depan char(30), nama_belakang char(30));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> drop table No1;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table contoh1 (nama_depan char(30), nama_belakang char(30));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show tables;
++-----------------+
+| Tables_in_lab10 |
++-----------------+
+| contoh1         |
++-----------------+
+1 row in set (0.01 sec)
+
+mysql> insert into contoh1
+    -> values ("Meisya", "Angelivia");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into contoh1
+    -> values ("Septia", "Yauma");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into contoh1
+    -> values ("Maharani", "Dwi");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into contoh1
+    -> values ("Novianti", "Dwi");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into contoh1
+    -> values ("Silfiana", "Dwi");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*
+    -> from contoh1;
++------------+---------------+
+| nama_depan | nama_belakang |
++------------+---------------+
+| Meisya     | Angelivia     |
+| Septia     | Yauma         |
+| Maharani   | Dwi           |
+| Novianti   | Dwi           |
+| Silfiana   | Dwi           |
++------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into contoh1
+    -> values ("Elysa", "Fadilah");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into contoh1
+    -> values ("Syifa", "Maulidina");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into contoh1
+    -> values ("Aprilia", "Widuri");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into contoh1
+    -> values ("Fatimah", "Azzahra");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into contoh1
+    -> values ("Nabiilah", "Nur");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*
+    -> from contoh1;
++------------+---------------+
+| nama_depan | nama_belakang |
++------------+---------------+
+| Meisya     | Angelivia     |
+| Septia     | Yauma         |
+| Maharani   | Dwi           |
+| Novianti   | Dwi           |
+| Silfiana   | Dwi           |
+| Elysa      | Fadilah       |
+| Syifa      | Maulidina     |
+| Aprilia    | Widuri        |
+| Fatimah    | Azzahra       |
+| Nabiilah   | Nur           |
++------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> select nama_depan, nama_belakang from contoh1;
++------------+---------------+
+| nama_depan | nama_belakang |
++------------+---------------+
+| Meisya     | Angelivia     |
+| Septia     | Yauma         |
+| Maharani   | Dwi           |
+| Novianti   | Dwi           |
+| Silfiana   | Dwi           |
+| Elysa      | Fadilah       |
+| Syifa      | Maulidina     |
+| Aprilia    | Widuri        |
+| Fatimah    | Azzahra       |
+| Nabiilah   | Nur           |
++------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> select nama_depan, nama_belakang from contoh1 where nama_depan <> 'Silfiana';
++------------+---------------+
+| nama_depan | nama_belakang |
++------------+---------------+
+| Meisya     | Angelivia     |
+| Septia     | Yauma         |
+| Maharani   | Dwi           |
+| Novianti   | Dwi           |
+| Elysa      | Fadilah       |
+| Syifa      | Maulidina     |
+| Aprilia    | Widuri        |
+| Fatimah    | Azzahra       |
+| Nabiilah   | Nur           |
++------------+---------------+
+9 rows in set (0.00 sec)
+
+mysql> select*from contoh1 where nama_depan = 'Silfiana';
++------------+---------------+
+| nama_depan | nama_belakang |
++------------+---------------+
+| Silfiana   | Dwi           |
++------------+---------------+
+1 row in set (0.00 sec)
+
+mysql> select*from contoh1 where nama_belakang LIKE '%Dwi%';
++------------+---------------+
+| nama_depan | nama_belakang |
++------------+---------------+
+| Maharani   | Dwi           |
+| Novianti   | Dwi           |
+| Silfiana   | Dwi           |
++------------+---------------+
+3 rows in set (0.00 sec)
+
+mysql> update contoh1 set nama_depan = 'Kayla', nama_belakang = 'Angelivia' where nama_depan = 'Meisya';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from contoh1;
++------------+---------------+
+| nama_depan | nama_belakang |
++------------+---------------+
+| Kayla      | Angelivia     |
+| Septia     | Yauma         |
+| Maharani   | Dwi           |
+| Novianti   | Dwi           |
+| Silfiana   | Dwi           |
+| Elysa      | Fadilah       |
+| Syifa      | Maulidina     |
+| Aprilia    | Widuri        |
+| Fatimah    | Azzahra       |
+| Nabiilah   | Nur           |
++------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> delete from contoh1 where nama_depan = 'Kayla';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from contoh1;
++------------+---------------+
+| nama_depan | nama_belakang |
++------------+---------------+
+| Septia     | Yauma         |
+| Maharani   | Dwi           |
+| Novianti   | Dwi           |
+| Silfiana   | Dwi           |
+| Elysa      | Fadilah       |
+| Syifa      | Maulidina     |
+| Aprilia    | Widuri        |
+| Fatimah    | Azzahra       |
+| Nabiilah   | Nur           |
++------------+---------------+
+9 rows in set (0.00 sec)
+
+mysql> alter table contoh1 add asal_sekolah char(30);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select*from contoh1;
++------------+---------------+--------------+
+| nama_depan | nama_belakang | asal_sekolah |
++------------+---------------+--------------+
+| Septia     | Yauma         | NULL         |
+| Maharani   | Dwi           | NULL         |
+| Novianti   | Dwi           | NULL         |
+| Silfiana   | Dwi           | NULL         |
+| Elysa      | Fadilah       | NULL         |
+| Syifa      | Maulidina     | NULL         |
+| Aprilia    | Widuri        | NULL         |
+| Fatimah    | Azzahra       | NULL         |
+| Nabiilah   | Nur           | NULL         |
++------------+---------------+--------------+
+9 rows in set (0.00 sec)
+
+mysql> update contoh1 set asal_sekolah = 'Polban' where nama_depan = 'Septia';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from contoh1;
++------------+---------------+--------------+
+| nama_depan | nama_belakang | asal_sekolah |
++------------+---------------+--------------+
+| Septia     | Yauma         | Polban       |
+| Maharani   | Dwi           | NULL         |
+| Novianti   | Dwi           | NULL         |
+| Silfiana   | Dwi           | NULL         |
+| Elysa      | Fadilah       | NULL         |
+| Syifa      | Maulidina     | NULL         |
+| Aprilia    | Widuri        | NULL         |
+| Fatimah    | Azzahra       | NULL         |
+| Nabiilah   | Nur           | NULL         |
++------------+---------------+--------------+
+9 rows in set (0.00 sec)
+
+mysql> update contoh1 set asal_sekolah = 'SMAN 5 Cimahi' where nama_depan = 'Septia';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from contoh1;
++------------+---------------+---------------+
+| nama_depan | nama_belakang | asal_sekolah  |
++------------+---------------+---------------+
+| Septia     | Yauma         | SMAN 5 Cimahi |
+| Maharani   | Dwi           | NULL          |
+| Novianti   | Dwi           | NULL          |
+| Silfiana   | Dwi           | NULL          |
+| Elysa      | Fadilah       | NULL          |
+| Syifa      | Maulidina     | NULL          |
+| Aprilia    | Widuri        | NULL          |
+| Fatimah    | Azzahra       | NULL          |
+| Nabiilah   | Nur           | NULL          |
++------------+---------------+---------------+
+9 rows in set (0.00 sec)
+
+mysql> update contoh1 set asal_sekolah = 'SMKN 1 Tanggerang' where nama_depan = 'Maharani';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update contoh1 set asal_sekolah = 'SMAN 22 Bandung' where nama_depan = 'Novianti';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update contoh1 set asal_sekolah = 'SMAN 01 Rancaekek' where nama_depan = 'Silfiana';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update contoh1 set asal_sekolah = 'Pondok Pesantren Assalam' where nama_depan = 'Elsya';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> update contoh1 set asal_sekolah = 'SMAS Qordova Bandung' where nama_depan = 'Syifa';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update contoh1 set asal_sekolah = 'SMAN 3 Cimahi' where nama_depan = 'Aprilia';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update contoh1 set asal_sekolah = 'SMAS Al Azhar' where nama_depan = 'Fatimah';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update contoh1 set asal_sekolah = 'SMAN 13 Bandung' where nama_depan = 'Nabiilah';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from contoh1;
++------------+---------------+----------------------+
+| nama_depan | nama_belakang | asal_sekolah         |
++------------+---------------+----------------------+
+| Septia     | Yauma         | SMAN 5 Cimahi        |
+| Maharani   | Dwi           | SMKN 1 Tanggerang    |
+| Novianti   | Dwi           | SMAN 22 Bandung      |
+| Silfiana   | Dwi           | SMAN 01 Rancaekek    |
+| Elysa      | Fadilah       | NULL                 |
+| Syifa      | Maulidina     | SMAS Qordova Bandung |
+| Aprilia    | Widuri        | SMAN 3 Cimahi        |
+| Fatimah    | Azzahra       | SMAS Al Azhar        |
+| Nabiilah   | Nur           | SMAN 13 Bandung      |
++------------+---------------+----------------------+
+9 rows in set (0.00 sec)
+
+mysql> update contoh1 set nama_depan = 'Elsya' where nama_depan = 'Elysa';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update contoh1 set asal_sekolah = 'Pondok Pesantren Assalam' where nama_depan = 'Elsya';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from contoh1;
++------------+---------------+--------------------------+
+| nama_depan | nama_belakang | asal_sekolah             |
++------------+---------------+--------------------------+
+| Septia     | Yauma         | SMAN 5 Cimahi            |
+| Maharani   | Dwi           | SMKN 1 Tanggerang        |
+| Novianti   | Dwi           | SMAN 22 Bandung          |
+| Silfiana   | Dwi           | SMAN 01 Rancaekek        |
+| Elsya      | Fadilah       | Pondok Pesantren Assalam |
+| Syifa      | Maulidina     | SMAS Qordova Bandung     |
+| Aprilia    | Widuri        | SMAN 3 Cimahi            |
+| Fatimah    | Azzahra       | SMAS Al Azhar            |
+| Nabiilah   | Nur           | SMAN 13 Bandung          |
++------------+---------------+--------------------------+
+9 rows in set (0.00 sec)
+
+mysql> create table contoh2 (asal_kota char (30), tahun_lahir char(30), bulan_lahir char(30));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select*from contoh2;
+Empty set (0.00 sec)
+
+mysql> drop table contoh2;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select*from contoh1;
++------------+---------------+--------------------------+
+| nama_depan | nama_belakang | asal_sekolah             |
++------------+---------------+--------------------------+
+| Septia     | Yauma         | SMAN 5 Cimahi            |
+| Maharani   | Dwi           | SMKN 1 Tanggerang        |
+| Novianti   | Dwi           | SMAN 22 Bandung          |
+| Silfiana   | Dwi           | SMAN 01 Rancaekek        |
+| Elsya      | Fadilah       | Pondok Pesantren Assalam |
+| Syifa      | Maulidina     | SMAS Qordova Bandung     |
+| Aprilia    | Widuri        | SMAN 3 Cimahi            |
+| Fatimah    | Azzahra       | SMAS Al Azhar            |
+| Nabiilah   | Nur           | SMAN 13 Bandung          |
++------------+---------------+--------------------------+
+9 rows in set (0.00 sec)
+
+mysql> insert into contoh2
+    -> values ("20030511", "56", "Februari");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from contoh2;
++---------------+------+--------------+
+| tanggal_lahir | usia | tempat_lahir |
++---------------+------+--------------+
+| 2003-05-11    |   56 | Februari     |
++---------------+------+--------------+
+1 row in set (0.00 sec)
+
+mysql> alter table contoh2 modify usia char(30);
+Query OK, 1 row affected (0.09 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> select*from contoh2;
++---------------+------+--------------+
+| tanggal_lahir | usia | tempat_lahir |
++---------------+------+--------------+
+| 2003-05-11    | 56   | Februari     |
++---------------+------+--------------+
+1 row in set (0.00 sec)
+
+mysql> drop table contoh2;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table contoh2 (tanggal_lahir date, tempat_lahir char (30));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select*from contoh2;
+Empty set (0.00 sec)
+
+mysql> drop table contoh2;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table contoh2 (nama_lengkap char (30), tanggal_lahir char (30), tempat_lahir char (30));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into contoh2 values ("Septia Yauma", "20030412", "Cimahi");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into contoh2 values ("Maharani Dwi", "20040510", "Tanggerang");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into contoh2 values ("Novianti Dwi", "20031121", "Bandung");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into contoh2 values ("Silfiana Dwi", "20040202", "Bandung");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into contoh2 values ("Elsya Fadilah", "20040329", "Pangandran");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into contoh2 values ("Syifa Maulidina", "20030317", "Bandung");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into contoh2 values ("Aprilia Widuri", "20030409", "Cimahi");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into contoh2 values ("Fatimah Azzahra", "20040713", "Cimahi");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into contoh2 values ("Nabiilah Nur", "20040624", "Nagreg");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from contoh2;
++-----------------+---------------+--------------+
+| nama_lengkap    | tanggal_lahir | tempat_lahir |
++-----------------+---------------+--------------+
+| Septia Yauma    | 20030412      | Cimahi       |
+| Maharani Dwi    | 20040510      | Tanggerang   |
+| Novianti Dwi    | 20031121      | Bandung      |
+| Silfiana Dwi    | 20040202      | Bandung      |
+| Elsya Fadilah   | 20040329      | Pangandran   |
+| Syifa Maulidina | 20030317      | Bandung      |
+| Aprilia Widuri  | 20030409      | Cimahi       |
+| Fatimah Azzahra | 20040713      | Cimahi       |
+| Nabiilah Nur    | 20040624      | Nagreg       |
++-----------------+---------------+--------------+
+9 rows in set (0.00 sec)
+
+mysql>

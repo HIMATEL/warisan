@@ -1,0 +1,620 @@
+=========================================
+### PENGENALAN MODE ###
+ada 3 mode dalam perangkat CISCO
+1. "switch>" = user mode
+2. "switch#" = privilage mode (mode enable)
+3. "switch(config) = configure mode
+
+dari user mode ke privilage mode, gunakan:
+switch> enable
+switch#
+
+dari privilage mode ke configure mode, gunakan:
+switch# configure terminal
+switch(config)#
+
+ada sistem hirarki:
+user mode -> privilage mode -> configure mode
+
+kalau mau mundur, gunakan command "exit"
+=========================================
+### PENGENALAN ERROR ###
+Ada 2 jenis error:
+1. pada mode configure:
+-----------------------------------------
+Switch(config)#misalvtp
+                ^
+% Invalid input detected at '^' marker.
+-----------------------------------------
+pada contoh 1, akan ada marked yang menunjukan lokasi error
+
+2. pada mode user dan privilage
+-----------------------------------------
+Switch#nono
+Translating "nono"...domain server (255.255.255.255)
+% Unknown command or computer name, or unable to find computer address
+-----------------------------------------
+pada contoh 2, perangkat akan melalukan name lookup ke server untuk mencari command tsb.
+
+solusi untuk error contoh 2:
+1) intrupt command dengan tekan:
+"ctrl"+"shift"+6"
+
+2) matikan fungsi lookup:
+switch(config)#no ip domain-lookup
+============================================
+### KONFIGURASI DASAR PART 1 (5) ####
+Harus dilakukan di mode configure:
+switch(config):
+-----------------------------------------------
+1. Set Hostname: memberikan nama pada perangkat
+(config)# hostname <nama hostname>
+
+contoh:
+switch(config)# hostname SW_1
+SW_1(config)#
+
+catatan: sebagai rekomen best practice, untuk penulisan nama, deskripsi, dsb sebaiknya huruf kapital semua, agar tidak tertukar dengan command
+-----------------------------------------------
+2. Set Username/Password
+cara 1: menggunakan password (password 7)
+(config)# username <nama user> password <password>
+
+contoh:
+SW_1(config)# username admin password admin
+
+cara 2: menggunakan secret (md5)
+(config)# username <nama user> secret <password>
+
+contoh:
+SW_1(config)# username admin password admin
+
+verifikasi:
+bisa melihat seluruh konfigurasi dengan command:
+"#show running-config"              => di mode enable
+"(config)# do show running-config"  => di mode config
+-----------------------------------------------
+3. Set service password encrypt (optional ketika menggunakan secret)
+SW_1(config)# service password-encryption
+
+verifikasi:
+bisa melihat seluruh konfigurasi dengan command:
+"#show running-config"              => di mode enable
+"(config)# do show running-config"  => di mode config
+-----------------------------------------------
+4. Set line Console Password : digunakan set keamaan pada console
+
+(config)# line console 0
+(config-line)#
+
+ada 2 cara:
+1. Gunakan informasi user/name pada tahap 2.
+(config)# line console 0
+(config-line)# login local
+
+2. Gunakan command password untuk set password console
+(config)# line console 0
+(config-line)# password <nama password>
+(config-line)# login
+-----------------------------------------------
+5. Set Enable Password : setting password untuk masuk ke mode privilage (enable)
+
+(config)# enable secret <password>
+
+contoh:
+(config)# enable secret admin
+-----------------------------------------------
+6. Set Banner : setting Banner Masuk
+(config)# banner motd " <bannner> "
+(config)# banner motd * <bannner> *
+(config)# banner motd % <bannner> %
+
+contoh:
+(config)# banner motd "Selamat Datang, yang tidak berkepentingan Dilarang Masuk!"
+-----------------------------------------------
+6. Set Interface Fisik
+
+sebelum memulai, pertama kita bisa melakukan cek pada status interface:
+
+Cek interface layer 2 (yang akan muncul hanya interface fisik)
+#show interface status  => mode privilage
+(config)#do show interface status => mode config
+
+Cek VLAN Status
+#show vlan brief  => mode privilage
+(config)#do show vlan brief => mode config
+
+Cek interface layer 3 (interface fisik dan logik akan muncul)
+#show ip interface brief  => mode privilage
+(config)#do show ip interface brief => mode config
+
+Status                Protocol 
+up                    up       : kondisi port aktif, dan ada kabel plug in
+down                  down     : kondisi port aktif, tidak ada kabel plug in
+admin down            down     : kondisi port non-aktif oleh admin
+up                    down     : error
+down                  up       : error
+
+SETTING INTERFACE:
+1. untuk set interface satuan / single interface
+(config)#interface <nama interface>
+(config-if)#
+
+contoh:
+(config)#interface fa0/1
+(config-if)#
+
+2. untuk set interface banyak (range)/ range interface
+(config)# interface range <nama interface awal> / <akhir>
+
+contoh:
+(config)#interface range fa0/1-12
+(config-if-range)#
+
+config interface fa0/1-12 dengan vlan 10
+(config)#interface range fa0/1-12            => akses interface fa0/1 - fa0/12
+(config-if-range)# switchport mode access    => set interface ke mode akses
+(config-if-range)# switchport access vlan 10 => set interface ke vlan 10
+(config-if-range)# no shutdown               => untuk menyalakan interface
+(config-if-range)# description INT_VL_10     => untuk memberi deskripsi
+
+config interface fa0/13-24 dengan vlan 20
+(config)#interface range fa0/13-24           => akses interface fa0/13 - fa0/24
+(config-if-range)# switchport mode access    => set interface ke mode akses
+(config-if-range)# switchport access vlan 20 => set interface ke vlan 20
+(config-if-range)# no shutdown               => untuk menyalakan interface
+(config-if-range)# description INT_VL_20     => untuk memberi deskripsi
+
+7. Mematikan port yang tidak digunakan
+sebagai catatan:
+default port switch itu aktif, sedangkan
+default port router itu mati
+
+untuk menyalakan port ==> #no shutdown
+untuk mematikan port  ==> #shutdown
+
+#interface range 0/4-12
+(config-if-range)# shutdown
+
+#interface range 0/16-24
+(config-if-range)# shutdown
+
+### KONFIGURASI DASAR PART 2 (5) ####
+Sebelum melanjutkan pada parta 2, silahkan dicek kembali konfigurasi sebelumnya:
+#show running-config  ==> digunakan untuk cek seluruh config
+#show ip interface brief ==> digunakan untuk cek status interface layer 3
+#show interface status ==> digunakan untuk cek status interface layer 2
+#show vlan brief ==> digunakan untuk cek vlan dan interface pada vlan
+
+7. Set Interface Logic (minggu depan)
+- pada tahap ini, kalau kita melihat di command "show vlan brief", kita akan melihat ada 3 buah vlan, yakni vlan 1, vlan 10 & vlan 20
+- tapi kalau kita mencek di command "show ip interface brief", kita hanya melihat interface vlan 1 saja, tidak ada interface vlan 10 & vlan 20
+
+Tujuan pada tahap 7 ini:
+1. Kita akan membuat interface vlan 10 & vlan 20
+2. kedua interface tersebut akan kita gunakan untuk pengalamatan ip address
+
+"kenapa alamat ny tidak di interface fisik saja ? seperti di fastethernet 0/1, dst..?"
+jawabannya: karena interface fisik SWITCH, merupakan interface layer 2. pada layer 2 tidak ada konsep IP address. sehingga pada interface fisik SWITCH tidak dapat di assign IP ADDRESS. 
+
+karena IP ADDRESS merupakan konsep layer 3, 
+dan SWITCH adalah perangkat layer 2 
+==> pada interface SWITCH tidak akan pernah bisa di assign IP Address, kecuali SWITCH LAYER 3 (MULTI LAYER SWITCH)
+
+
+CONFIGURASI INTERFACE LOGIC (VLAN):
+
+konfigurasi interface vlan 10:
+(config)# interface vlan 10
+(config-if)# ip address 192.168.10.2 255.255.255.0
+(config-if)# description INTERFACE_VL_10
+(config-if)# no shutdown
+
+konfigurasi interface vlan 20:
+(config)# interface vlan 20
+(config-if)# ip address 192.168.20.2 255.255.255.0
+(config-if)# description INTERFACE_VL_20
+(config-if)# no shutdown
+
+verifikasi: 
+1.cek dengan command "#show ip interface brief", akan muncul interface vlan 10 & vlan 20, serta ip address nya
+2. cek melalui PC, harus bisa komunikasi:
+a. untuk cek vlan 10:
+- Buka PC 0, PC 1, & PC2 
+- Buka Desktop
+- Buka Command Prompt
+- cek dengan paket ICMP (Internet Control Message Protocol) ==> command ny sbb: "ping 192.168.10.2"
+- harus reply
+
+a. untuk cek vlan 20:
+- Buka PC 3, PC 4, & PC5 
+- Buka Desktop
+- Buka Command Prompt
+- cek dengan paket ICMP ==> "ping 192.168.20.2"
+- harus reply
+
+8. Set line Virtual (TELNET)
+Line VTY digunakan sebagai SOLUSI REMOTE AKSES
+
+ada 2 cara config (sama seperti config console)
+cara 1: menggunakan informasi user/name
+(config)# line vty 0 4
+(config-line)# login local
+
+cara 2: menggunakan config password
+(config)# line vty 0 4
+(config-line)# password admin
+(config-line)# login
+
+verifikasi:
+a. dari vlan 10:
+- Buka PC 0, PC 1, & PC2 
+- Buka Desktop
+- Buka Command Prompt
+- cek dengan telnet ==> command ny sbb: "telnet 192.168.10.2"
+- nanti akan masuk ke terminal switch
+
+b. dari vlan 20:
+- Buka PC 3, PC 4, & PC5 
+- Buka Desktop
+- Buka Command Prompt
+- cek dengan telnet ==> "telnet 192.168.20.2"
+- nanti akan masuk ke terminal switch
+
+KARENA TELNET ITU TIDAK ADA FITUR SECURITY, SEHINGGA TEXT NY DAPAT DIBACA, MAKA SEKARANG TELNET SUDAH TIDAK PERNAH DIPAKAI LAGI.
+
+SOLUSINYA MENGGUNAKAN: SSH (SECURE SHELL)
+
+9. Set line Virtual (SSH)
+
+- SSH adalah fitur remote yang menggunakan keamanan enkripsi RSA
+- Syarat untuk membuat SSH, harus terlebih dahulu membuat RSA
+- Syarat untuk membuat RSA, harus membuat HOSTNAME dan DOMAIN NAME
+
+a. kita akan mengconfigurasi RSA terlebih dahulu:
+1. membuat HOSTNAME:168
+(config)# hostname <nama hostname>
+
+2. membuat DOMAIN NAME:
+(config)# ip domain name <nama domain> 
+
+dalam lab kita: 
+(config)# hostname SW_1
+(config)# ip domain name cisco.com
+
+selanjutnya membuat RSA:
+(config)# crypto key generate rsa 
+enter dan akan ditanya modulus;
+modulus [512] : bisa diisi: 512 atau 1024 2048
+
+3. MEMBUAT SSH , note: SSH HARUS MENGGUNAKAN USERNAME, TIDAK BISA HANYA PASSWORD, SEHINGGA HARUS MENGGUNAKAN "LOGIN LOCAL"
+(config)# username admin password admin
+(config)#line vty 0 4
+(config-line)# login local
+(config-line)# transport input ssh  ==> digunakan agar hanya SSH yg bisa dipakai untuk remote
+
+verifikasi:
+a. dari vlan 10:
+- Buka PC 0, PC 1, & PC2 => Buka Desktop => Buka Command Prompt
+- cek dengan ssh ==> command ny sbb: "ssh -l <username> <ip address>" ==> INI "-l" adalah "L KECIL bukan angka 1"
+dalam lab kita, sbb: "ssh -l admin 192.168.10.2"
+- nanti akan masuk ke terminal switch
+
+b. dari vlan 20:
+- Buka PC 3, PC 4, & PC5 
+- Buka Desktop
+- Buka Command Prompt
+- cek dengan telnet ==> "telnet 192.168.20.2"
+- nanti akan masuk ke terminal switch
+
+UNTUK TUGAS, BISA CHECK DI WA GROUP
+ADA FILE PKT
+
+SILAHKAN DIKERJAKAN SEBAGAI TUGASNYA, DEADLINE SAMPAI PERTEMUAN MINGGU DEPAN
+DI PERTEMUAN MINGGU DEPAN, AKAN ADA 1 ORANG SECARA ACAK UNTUK MENGERJAKAN PKT TERSEBUT DIDEPAN
+
+
+
+9. Save (INI HARUS DILAKUKAN) , selama perangkat tidak mati maka konfigurasi tidak akan hilang, namun kalau dimatikan maka akan menghilang
+
+Konfigurasi pada saat nyala     --> running-config ==> NVRAM
+Konfigurasi yang di boot(saved) --> startup-config ==> flash
+
+untuk save ada 2 cara:
+cara 1. save di startup-configuration:
+#copy running-config startup-config
+
+cara 2. save di flash:
+#write
+
+
+
+### KONFIGURE INTERVLAN ROUTING (ROUTER ON STICK):####
+
+INTERVLAN ROUTING MERUPAKAN METODE YANG DIGUNAKAN
+AGAR SELURUH VLAN BISA SALING KOMUNIKASI
+1. CLASSIC ==> MENGGUNAKAN 1 ATAU LEBIH ROUTER DAN LEBIH DARI 1 PORT/INTEFACE FISIK
+2. ROUTER ON STICK ==> MENGGUNAKAN 1 ATAU LEBIH ROUTER DAN CUKUP 1 PORT/INTEFACE FISIK, NAMUN MENGGUNAKAN LEBIH DARI 1 INTERFACE LOGIC (SUBINTERFACE DARI INTERFACE FISIK)
+3. MULTILAYER SWITCH ==> SWITCH LAYER 3
+
+
+
+
+Pertama kita akan lakukan konfigurasi dasar dulu pada router R1
+- set Hostname
+- set Username/Password
+- set enable password
+- set line console
+- sel line vty (SSH)
+
+hostname R1
+username admin pass admin
+enable secret admin
+ip domain name cisco.com
+crypto key generate rsa
+line con 0
+password admin
+login
+line vty 0 4
+login local
+transport input ssh
+
+
+Pada metode Router on Stick kita akan menggunakan interface logic
+yakni subinterface dari inteface G0/0, 
+
+Konfigurasi Router on Stick
+a. pada Router:
+- masuk ke interface fisik arah SWITCH
+- hidupkan interface fisik
+- masuk ke interface logic (subinterface)
+- set encapsulation 802.1Q dan VLAN
+- set IP Address
+
+1. pertama kita menyalakan terlebih dahulu interface fisik G0/0
+(config)# inteface g0/0
+(config-if)# no shutdown
+
+2. kita konfigurasi ke interface logic (subinterface)
+vlan 10:
+(config)# interface g0/0.10                           => masuk subinteface g0/0.10
+(config-subif)# encapsulation dot1Q 10                => set encapsulation 802.1Q VLAN 10
+(config-subif)# ip address 192.168.10.1 255.255.255.0 => set IP Gateway
+
+vlan 20:
+(config)# interface g0/0.20            
+(config-subif)# encapsulation dot1Q 20 
+(config-subif)# ip address 192.168.20.1 255.255.255.0 
+
+b pada Switch:
+- masuk ke interface fisik arah ROUTER
+- set interface ke mode Trunk
+- set interface Trunk untuk semua VLAN
+ 
+ (config)# interface g0/1                        => akses interface arah ROUTER
+ (config-if)# switchport mode trunk              => set interface ke mode TRUNK
+ (config-if)# switchport trunk allowed vlan all  => set TRUNK untuk semua VLAN
+ 
+ mode access ==> hanya melewatkan 1 vlan
+ mode trunk  ==> melewatkan banyak vlan
+
+KONFIGURASI PADA PC:
+- MASUK KE PC 0, 1 dan 2 (VLAN 10)
+- MASUK KE DESKTOP -> IP CONFIGURATION -> SET IP DEFAULT GATEWAY (192.168.10.1)
+- MASUK KE PC 3, 4 dan 5 (VLAN 20)
+- MASUK KE DESKTOP -> IP CONFIGURATION -> SET IP DEFAULT GATEWAY (192.168.20.1)
+
+VERIFIKASI:
+- PING ANTAR PC : BUKA COMMAND PROMPT -> KETIK "PING <ALAMAT IP TUJUAN>"
+
+GOAL: 
+- PC DI VLAN 10 (PC 0,1,& 2) HARUS BISA KOMUNIKASI KE PC DI VLAN 20 (PC 3,4,&5)
+
+
+
+
+
+ADDRESS RESOLUTION PROTOCOL (ARP)
+
+CARA KERJA SWITCH:
+1. KETIKA PAKET DATANG, SWITCH AKAN MELAKUKAN CEK PADA MAC ADDRESS TABEL
+- KALAU MAC ADDRESS TERSEBUT DIKETAHUI (ATAU ADA PADA TABEL), MAKA SWITCH AKAN MELAKUKAN UNICAST KE TUJUAN
+- KALAU MAC ADDRESS TERSEBUT TIDAK DIKETAHUI (ATAU TIDAK ADA PADA TABEL), MAKA SWITCH AKAN MELAKUAN BROADCAST KE SEMUA PORT NY SELAIN PORT PAKET TERSEBUT DATANG
+
+TUJUAN UNTUK MENGETAHUI LOKASI MAC ADDRESS TERSEBUT BERADA DI PORT BERAPA
+
+
+
+
+=====================================
+Etherchannel/BundleEther/EtherBundle
+=====================================
+Fungsi ny menggabungkan beberapa link interface menjadi 1 interface logic
+
+Tipe Etherchannel:
+LACP : Open Standar
+     : active - pasif
+     : active - active
+     
+PAGP : Cisco
+     : desirable - auto
+     : desirable - desirable 
+
+aktif (lacp) dan desirable (pagp) => melakukan
+transmit negosiasi untuk menjadi etherchannel
+
+pasif (lacp) dan auto (pagp) => tidak melakukan tranmit, melainkan menunggu negosiasi
+
+Konfigurasi:
+SW_VL30:
+(config)# interface range fa0/13-14
+(config-if-range)# channel-group 1 mode active
+
+(config)# interface port-channel 1
+(config-if)# switchport mode trunk
+(config-if)# switchport trunk allowed vlan all
+
+CORE_SW (MLS):
+(config)# interface range fa0/13-14
+(config-if-range)# channel-group 1 mode active
+
+(config)# interface port-channel 1
+(config-if)# switchport mode trunk
+(config-if)# switchport trunk allowed vlan all
+
+(config)# interface range fa0/15-16
+(config-if-range)# channel-group 2 mode active
+
+(config)# interface port-channel 2
+(config-if)# switchport mode trunk
+(config-if)# switchport trunk allowed vlan all
+
+SW_VL40:
+(config)# interface range fa0/15-16
+(config-if-range)# channel-group 2 mode active
+
+(config)# interface port-channel 2
+(config-if)# switchport mode trunk
+(config-if)# switchport trunk allowed vlan all
+
+Verifikasi: # show etherchannel summary
+
+=====================================
+VTP : VLAN TRUNKING PROTOCOL
+=====================================
+FUNGSI: Untuk melakukan konfigurasi VLAN dalam satu perangkat saja , dimana nanti database vlan akan di distribusi ke switch lain
+
+VTP Mode:
+1. Server => sumber vlan, dia mengirimkan informasi vlan ke switch lain (aktif)
+2. Client => menerima informasi vlan dari Server (pasif)
+3. Transparent => independent dari Server, hanya forwarding informasi
+
+Konfigurasi:
+Core_SW (MLS):
+(config)# vtp domain cisco.com
+(config)# vtp password cisco
+(config)# vtp mode server
+
+SW_VL30: 
+(config)# vtp domain cisco.com
+(config)# vtp password cisco
+(config)# vtp mode client
+
+SW_VL40:
+(config)# vtp domain cisco.com
+(config)# vtp password cisco
+(config)# vtp mode client
+
+Verifikasi: #show vtp status
+
+(config)#vlan 30
+(config-vlan)#name KARYAWAN_VL30
+(config)#vlan 40
+(config-vlan)#name KARYAWAN_VL40
+============================
+INTERVLAN ROUTING (MLS)
+============================
+(config)# ip routing
+
+(config)# interface vlan 30
+(config-if)# ip address 192.168.30.1 255.255.255.0
+(config)# interface vlan 40
+(config-if)# ip address 192.168.40.1 255.255.255.0
+============================
+dan jangan lupa, ke arah Host harus dibuat access
+============================
+SW_VL30:
+(config)# interface ra fa0/1-2
+(config-if-range)# switchport mode access
+(config-if-range)# switchport access vlan 30
+
+SW_VL40:
+(config)# interface ra fa0/1-2
+(config-if-range)# switchport mode access
+(config-if-range)# switchport access vlan 40
+
+VErifikasi: setiap PC harus bisa saling PING
+
+==============================================================================
+==============================================================================
+
+selama praktikum, kita sudah belajar mengenai:
+1. Konfigurasi Dasar
+- set hostname
+- set username dan password
+- set enable secret
+- set ip domain name
+- set banner
+- set interface fisik
+- set interface logic
+- set line console
+- set line remote (vty) => telnet dan ssh
+
+2. Konfigurasi VLAN
+3. Konfigurasi Access dan Trunking
+4. Konfiugrasi INTERVLAN ROUTING => Router on stick
+5. Spanning Tree Protocol
+6. VTP (VLAN TRUNKING PROTOCOL)
+7. Konfigurasi Etherchannel
+8. Konfiugrasi INTERVLAN ROUTING => Multilayer SWITCH
+
+9. ROUTING 
+
+CARA MELIHAT ROUTING TABLE:
+1) PADA CISCO ==> SHOW IP ROUTE
+
+CARA MEMBUAT ROUTING STATIC:
+### MENGKONFIGURASI INTERFACE POINT-TO-POINT ###
+## POINT-TO-POINT ANTAR ROUTER (R1) dan MLS (CORE SW) ##
+R1:
+>enable
+#config terminal
+(config)# interface Gig0/1
+(config-if)# ip address 123.123.123.1 255.255.255.252
+(config-if)# no shutdown
+
+MLS (CORE_SW):
+>enable
+#config terminal
+(config)# interface Gig0/1
+(config-if)# no switchport
+(config-if)# ip address 123.123.123.2 255.255.255.252
+(config-if)# no shutdown
+
+VERIFIKASI: 
+1. PING IP POINT-TO-POINT 
+R1     : ping 123.123.123.2
+CORE SW: ping 123.123.123.1
+
+### KONFIGURASI ROUTING STATIC ###
+ada 2 cara dalam mengkonfigurasi routing static:
+1. menggunakan next hop address => ip tetangga:
+(config)# ip route <dest ip> <subnet mask> <next hop>
+
+2. menggunakan exit interface => interface diri sendiri
+(config)# ip route <dest ip> <subnet mask> <exit interface>
+
+GOALS:
+VLAN 10 <-> VLAN 30
+R1 (VLAN 10) --> MLS (VLAN 30):
+konfigurasi pada R1:
+(config)# ip route 192.168.30.0 255.255.255.0 123.123.123.2
+
+MLS (VLAN 30) --> R1 (VLAN 10):
+konfigurasi pada MLS: 
+(config)# ip route 192.168.10.0 255.255.255.0 123.123.123.1 
+
+VERIFIKASI : 
+1. VLAN 10 <-> VLAN 30 ==> 
+ping dari PC pada VLAN 10 ke PC pada VLAN 30
+misal: PC0 (192.168.10.10) -> PC-A (192.168.30.10)
+
+VLAN 10 <-> VLAN 40
+VLAN 20 <-> VLAN 30
+VLAN 20 <-> VLAN 40
+
+
+
+
+
+

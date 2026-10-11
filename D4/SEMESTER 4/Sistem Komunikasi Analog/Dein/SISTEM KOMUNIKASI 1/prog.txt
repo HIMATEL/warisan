@@ -1,0 +1,26 @@
+.include "m8535def.inc"
+.org 0x00
+rjmp main
+	; PAKAI PROJECT "ROOT"
+main : 
+ldi r16,low(ramend)
+out spl,r16		; spl = stack pointer low
+ldi r16,high(ramend)
+out sph,r16
+
+ldi r16,0xC2
+ldi r17,0xAD
+ldi r18,0x75	;Input data pertama
+
+ldi r29,0xE9
+ldi r30,0xDC
+ldi r31,0x6F	;Input data kedua
+
+sub r16,r29
+sbc r17,r30
+sbc r18,r31
+
+mov r21,r16
+mov r22,r17
+mov r23,r18
+akhir: rjmp akhir

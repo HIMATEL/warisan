@@ -1,0 +1,26 @@
+TITLE L08_02_02
+.MODEL SMALL
+.STACK 100H
+.DATA
+BM1 DW 7CD1H,5472H,580AH,57BCH,8007H,90AAH,0E09H,0AE9H,
+    DW 0B4C3H,297H,4CE7H,0D91H,0C88AH,0C4F7H,6F6CH
+BM2 DW 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+.CODE
+MAIN    PROC
+        MOV AX,@DATA
+        MOV DS,AX
+        MOV ES,AX
+        MOV SI,0
+        MOV DI,0
+        
+        CLD
+        MOV CX,20H
+        LEA SI,[BM1]
+        LEA DI,[BM2]
+        REP MOVSW
+
+        
+        MOV AH,4CH
+        INT 21H
+        MAIN ENDP
+END MAIN

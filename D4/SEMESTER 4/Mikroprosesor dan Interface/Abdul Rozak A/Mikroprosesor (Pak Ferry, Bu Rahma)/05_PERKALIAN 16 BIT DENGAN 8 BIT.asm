@@ -1,0 +1,34 @@
+TITLE 05_PERKALIAN 16 BIT DENGAN 8 BIT
+.MODEL SMALL
+.STACK 100H
+.DATA
+OP1 DW 12E2H
+OP2 DB 3CH
+HASIL DW 0
+.CODE
+MAIN PROC
+     MOV AX,@DATA
+     MOV DS,AX
+     
+     MOV CX,0
+     MOV BX,[OP1]
+     MOV CL,[OP2]
+     MOV DX,0
+     ADD BX,0
+     JZ  SKIP
+     ADD CL,0
+     JZ  SKIP
+     
+LUP: ADD DX,BX
+     ADC CH,0
+     DEC CL
+     JNZ LUP
+     MOV CL,CH
+     MOV CH,0
+     MOV [HASIL],DX
+     MOV [HASIL+2],CX
+SKIP: 
+     MOV AH,4CH
+     INT 21H
+     MAIN ENDP
+END MAIN

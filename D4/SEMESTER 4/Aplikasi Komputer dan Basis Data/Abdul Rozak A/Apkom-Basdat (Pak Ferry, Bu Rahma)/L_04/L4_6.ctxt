@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=L4_6
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=message
+comment2.target=double\ getInput(java.lang.String)
+comment3.params=panjang\ lebar
+comment3.target=double\ luas(double,\ double)
+numComments=4

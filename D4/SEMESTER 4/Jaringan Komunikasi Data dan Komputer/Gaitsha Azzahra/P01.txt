@@ -1,0 +1,31 @@
+NETWORK KOMPONEN
+
+host = segala sesuatu/komputer yang berhubungan lgsg dengan jaringan, client = yang membutuuhkan informasi
+server = penyedia informasi
+peer to peer = bisa berfungsi sbg client dan server, informasi yang diperoleh terbatas tergantung brp computer yang terhubung
+
+end devices sama seperti host
+  
+6. perangkat jaringan ( router, LAN switch, firewall) berfungsi sbg penguat sinyal yang diterima dan dikirim ke tempat lain 
+wireless router adalah gabungan acses point, router, dan switch 
+
+7. network media ( fiber optic, cable, wireless)
+
+TOPOLOGI JARINGAN, terdiri dari 3 komponen, end devices, perangkat jaringan, dan media. 
+topologi terbagi menjadi dua, topologi fisik(ditentukan dengan barang fisik) dan topologi logic (di tentukan dengan IP Adress)
+
+TYPES OF NETWORK
+LAN ( satu geografis misal se polban),
+WAN (menghubungkan sejumlah LAN), kepemilikan misal indosat, xl,dll
+
+4 SYARAT JARINGAN
+1. fault tolerance : skala jaringa gboleh putus/ ada jeda
+2. scalability	   : penambahan jaringan tanpa mengganggu jaringan yang ada
+3. Quality of Service
+4. Security
+
+
+PERANGKAT JARINGAN 
+1. HUB = berfungsi sebagai amplifier/penguat, sinyal yang dikirim dari port A melalui HUB dan dikirim ke semua port (B,C,D) yang aktif, HUB tidak bisa menerima sekaligus mengirim ( klo lagi jd pengirim dia gabisa nerima), komunikasi yang terjadi disebut half duplex. Dan jika ada port yang mengirim data secara bersamaan kepada T yang sama maka akan terjadi collisian (tabrakan data) yang membuat datanya rusak, biasanya digunakan oleh administrator jaringan
+2. SWITCH = bisa menerima dan mengirim, switch akan mengintogerasi data yang masuk dengan melihat MAC Adress, jika switch mati data akan hilang, dan jika data tidak ditujukan pada port yang tersedia makan switch akan mengirim ke semua port yang terhubung, jika port dan MAC Adress sudah terdapat pada table MAC maka pengiriman data akan terjadi point to point dan tidakk akan mengirim pada port yang tidak dituju.komunikasi yang terjadi disebut full duplex
+3. ROUTER = bekerja setelah tabel router dibuat dan tinggal mengirim lgsg ke alamat tujuan, dan jika tidak ada alamat router maka akan di blokir oleh router dan data tidak akan tekirim

@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=L4_3
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=str\ karakter
+comment2.target=int\ hitungA(java.lang.String,\ char)
+numComments=3

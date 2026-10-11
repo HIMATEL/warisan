@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Mahasiswa6Matkul3Diurutkan
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=namaMahasiswa\ nilaiMatematika\ nilaiFisika\ nilaiKimia
+comment2.target=void\ selectionSortByFisika(java.lang.String[],\ double[],\ double[],\ double[])
+comment3.params=namaMahasiswa\ nilaiMatematika\ nilaiFisika\ nilaiKimia
+comment3.target=void\ displayData(java.lang.String[],\ double[],\ double[],\ double[])
+numComments=4

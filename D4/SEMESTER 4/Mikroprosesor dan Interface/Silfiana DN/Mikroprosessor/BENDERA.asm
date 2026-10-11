@@ -1,0 +1,25 @@
+TITLE
+.MODEL SMALL
+.STACK 100H
+.DATA
+.CODE
+MAIN PROC
+     MOV AX,0B800H
+     MOV DS,AX
+     MOV CX,960
+     MOV SI,0     
+     
+LUP1:MOV [SI],0C020H
+     ADD SI,2
+     LOOP LUP1
+     MOV CX,960
+
+LUP2:MOV [SI],0F020H
+     ADD SI,2
+     LOOP LUP2
+     
+     MOV AH,4CH
+     INT 21H
+     
+MAIN ENDP
+END MAIN

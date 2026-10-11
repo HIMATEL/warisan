@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=catatan
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=k
+comment2.target=int[]\ inputMatriks(int)
+comment3.params=r
+comment3.target=void\ cetakMatriks(int[])
+numComments=4

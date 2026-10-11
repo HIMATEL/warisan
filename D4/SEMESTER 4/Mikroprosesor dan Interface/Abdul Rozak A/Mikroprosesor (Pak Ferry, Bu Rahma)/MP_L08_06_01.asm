@@ -1,0 +1,25 @@
+TITLE L08_05CR2
+.MODEL SMALL
+.STACK 100H
+.DATA
+BM1 DB 23H,56H,22H,8AH,0F3H,66H,8H,7CH
+.CODE
+MAIN PROC
+     MOV AX,@DATA
+     MOV DS,AX
+        
+     MOV CL,[BM1]
+     MOV SI,1
+        
+L0:  MOV BL,[BM1+SI]
+     CMP CL,BL
+     JL  SK0
+     MOV CL,BL
+SK0: INC SI
+     CMP SI,7H
+     JNZ L0
+      
+     MOV AH,4CH
+     INT 21H
+     MAIN ENDP
+END MAIN

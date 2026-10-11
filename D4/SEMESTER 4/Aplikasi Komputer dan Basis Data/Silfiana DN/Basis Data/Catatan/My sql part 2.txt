@@ -1,0 +1,126 @@
+Enter password: ************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database latihan1;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> connect Lab10;
+Connection id:    12
+Current database: Lab10
+
+mysql> create table No1 (Nama_Komponen char(30), Part_Number cha
+r(30), Jumlah char(30), Harga_Satuan char(30), Total char(30));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into no1 values ("Resistor 330K", "102010101", "10
+", "250", "2500");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into no1 values ("Kapasitor 22uF", "102020102", "20", "300", "6000");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into no1 values ("Transistor", "102020103", "25",
+"1000", "25000");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from no1;
++----------------+-------------+--------+--------------+-------+
+| Nama_Komponen  | Part_Number | Jumlah | Harga_Satuan | Total |
++----------------+-------------+--------+--------------+-------+
+| Resistor 330K  | 102010101   | 10     | 250          | 2500  |
+| Kapasitor 22uF | 102020102   | 20     | 300          | 6000  |
+| Transistor     | 102020103   | 25     | 1000         | 25000 |
++----------------+-------------+--------+--------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table No2 (Nama_Komponen char(30), Part_Number cha
+r(30), Jumlah char(30), Harga_Satuan char(30), Total char(30));
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> insert into no2 values ("Resistor 330K", "102010101", "15", "250", "3750");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into no2 values ("Kapasitor 22uF", "102020102", "30", "300", "9000");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into no2 values ("Transistor", "102020103", "50",
+"1000", "50000");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from no2;
++----------------+-------------+--------+--------------+-------+
+| Nama_Komponen  | Part_Number | Jumlah | Harga_Satuan | Total |
++----------------+-------------+--------+--------------+-------+
+| Resistor 330K  | 102010101   | 15     | 250          | 3750  |
+| Kapasitor 22uF | 102020102   | 30     | 300          | 9000  |
+| Transistor     | 102020103   | 50     | 1000         | 50000 |
++----------------+-------------+--------+--------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM tabel1
+    -> defem
+    -> SELECT * FROM tabel1
+    -> INNER JOIN tabel2 ON tabel1.kolom1 = tabel2.kolom2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SELECT * FROM tabel1
+INNER JOIN tabel2 ON tabel1.kolom1 = tabel2.kolom2' at line 3
+mysql>
+mysql>
+mysql> select*from no1 inner join no2 on no1.kolom1 = no2.kolom2
+;
+ERROR 1054 (42S22): Unknown column 'no1.kolom1' in 'on clause'
+mysql>
+mysql> select*from no1 inner join no2 on no1.Jumlah = no2.Jumlah;
+Empty set (0.00 sec)
+
+mysql> select A.Nama_Komponen, A.Part_Number, A.Jumlah, A.Harga_Satuan, A.Total, B.Jumlah, B.Harga_Satuan, B.Total
+    -> from no1 A, no2 B
+    -> where A.nama = B.nama;
+ERROR 1054 (42S22): Unknown column 'A.nama' in 'where clause'
+mysql>
+mysql> select A.Nama_Komponen, A.Part_Number, A.Jumlah, A.Harga_Satuan, A.Total, B.Nama_Komponen, B.Jumlah, B.Harga_Satuan, B.To
+tal
+    -> from no1 A, no2 B
+    -> where A.Nama_Komponen = B.Nama_Komponen;
++----------------+-------------+--------+--------------+-------+----------------+--------+--------------+-------+
+| Nama_Komponen  | Part_Number | Jumlah | Harga_Satuan | Total | Nama_Komponen  | Jumlah | Harga_Satuan | Total |
++----------------+-------------+--------+--------------+-------+----------------+--------+--------------+-------+
+| Resistor 330K  | 102010101   | 10     | 250          | 2500  | Resistor 330K  | 15     | 250          | 3750  |
+| Kapasitor 22uF | 102020102   | 20     | 300          | 6000  | Kapasitor 22uF | 30     | 300          | 9000  |
+| Transistor     | 102020103   | 25     | 1000         | 25000 | Transistor     | 50     | 1000         | 50000 |
++----------------+-------------+--------+--------------+-------+----------------+--------+--------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select A.Nama_Komponen, B.Part_Number "Part_Number",
+    -> A.Jumlah + B.Jumlah Jumlah, A.Harga_Satuan 
+       "Harga_Satuan", A.Total + B.Total Total
+    -> from no1 A, no2 B where A.Part_Number = B.Part_Number;
++----------------+-------------+--------+--------------+-------+
+| Nama_Komponen  | Part_Number | Jumlah | Harga_Satuan | Total |
++----------------+-------------+--------+--------------+-------+
+| Resistor 330K  | 102010101   |     25 | 250          |  6250 |
+| Kapasitor 22uF | 102010102   |     50 | 300          | 15000 |
+| Transistor     | 102010103   |     75 | 1000         | 75000 |
++----------------+-------------+--------+--------------+-------+
+3 rows ^C set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+

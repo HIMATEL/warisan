@@ -1,0 +1,326 @@
+Enter password: ************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 14
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database lab11;
+Query OK, 1 row affected (0.11 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| lab10              |
+| lab11              |
+| latihan1           |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+7 rows in set (0.05 sec)
+
+mysql> connect lab11;
+Connection id:    15
+Current database: lab11
+
+mysql> CREATE TABLE table_ai(kode_transaksi INT AUTO_INCREMENT, deskripsi VARCHAR(200), PRIMARY KEY(kode_transaksi));
+Query OK, 0 rows affected (0.16 sec)
+
+mysql> INSERT INTO table_ai(deskripsi)VALUES('deskripsi1');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO table_ai(deskripsi)VALUES('deskripsi2');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from table_ai;
++----------------+------------+
+| kode_transaksi | deskripsi  |
++----------------+------------+
+|              1 | deskripsi1 |
+|              2 | deskripsi2 |
++----------------+------------+
+2 rows in set (0.00 sec)
+
+=============================================================================================================================================
+mysql> CREATE TABLE pembeli(id_pembeli INT NOT NULL AUTO_INCREMENT PRIMARY KEY, nama_pembeli varchar(30) not null, jk char(1), 
+no_telp char(14), alamat varchar(50));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> INSERT INTO pembeli(nama_pembeli, jk, no_telp, alamat) VALUES ('Silfiana Dwi', 'P', '08997150480', 'Rancaekek Kencana');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO pembeli(nama_pembeli, jk, no_telp, alamat) VALUES ('Bayu Andi', 'L', '08123456789', 'Griya Utama');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO pembeli(nama_pembeli, jk, no_telp, alamat) VALUES ('Satria Putra', 'L', '08987654321', 'Kamboja 1');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO pembeli(nama_pembeli, jk, no_telp, alamat) VALUES ('Azmya Putri', 'P', '08112233445', 'Teratai V');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO pembeli(nama_pembeli, jk, no_telp, alamat) VALUES ('Setiawan Syaputra', 'L', '08998877665', 'Karang Tineung');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from pembeli;
++------------+-------------------+------+-------------+-------------------+
+| id_pembeli | nama_pembeli      | jk   | no_telp     | alamat            |
++------------+-------------------+------+-------------+-------------------+
+|          1 | Silfiana Dwi      | P    | 08997150480 | Rancaekek Kencana |
+|          2 | Bayu Andi         | L    | 08123456789 | Griya Utama       |
+|          3 | Satria Putra      | L    | 08987654321 | Kamboja 1         |
+|          4 | Azmya Putri       | P    | 08112233445 | Teratai V         |
+|          5 | Setiawan Syaputra | L    | 08998877665 | Karang Tineung    |
++------------+-------------------+------+-------------+-------------------+
+5 rows in set (0.00 sec)
+
+==============================================================================================================
+mysql> CREATE TABLE barang(id_barang INT NOT NULL AUTO_INCREMENT PRIMARY KEY, nama_barang varchar(20) not null, 
+harga int, stok int);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> INSERT INTO barang(nama_barang, harga, stok) VALUES ('Beras', '16000', '50');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO barang(nama_barang, harga, stok) VALUES ('Minyak', '20000', '30');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO barang(nama_barang, harga, stok) VALUES ('Teh Celup', '7000', '27');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO barang(nama_barang, harga, stok) VALUES ('Susu Kaleng', '19500', '33');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO barang(nama_barang, harga, stok) VALUES ('Sabun Cair', '14000', '42');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from barang;
++-----------+-------------+-------+------+
+| id_barang | nama_barang | harga | stok |
++-----------+-------------+-------+------+
+|         1 | Beras       | 16000 |   50 |
+|         2 | Minyak      | 20000 |   30 |
+|         3 | Teh Celup   |  7000 |   27 |
+|         4 | Susu Kaleng | 19500 |   33 |
+|         5 | Sabun Cair  | 14000 |   42 |
++-----------+-------------+-------+------+
+5 rows in set (0.00 sec)
+
+==================================================================================================================
+mysql> CREATE TABLE transaksi(id_transaksi INT NOT NULL AUTO_INCREMENT PRIMARY KEY, id_barang int, id_pembeli int, 
+tanggal date, keterangan varchar(100), CONSTRAINT id_barang FOREIGN KEY (id_barang) REFERENCES barang (id_barang), 
+CONSTRAINT id_pembeli FOREIGN KEY (id_pembeli) REFERENCES pembeli (id_pembeli));
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> INSERT INTO transaksi(id_barang, id_pembeli, tanggal, keterangan) VALUES ('1', '1' , '20240202', 'LUNAS');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO transaksi(id_barang, id_pembeli, tanggal, keterangan) VALUES ('2', '2' , '20240310', 'KREDIT');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO transaksi(id_barang, id_pembeli, tanggal, keterangan) VALUES ('3', '3' , '20240322', 'LUNAS');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO transaksi(id_barang, id_pembeli, tanggal, keterangan) VALUES ('4', '4' , '20240421', 'LUNAS');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO transaksi(id_barang, id_pembeli, tanggal, keterangan) VALUES ('5', '5' , '20240501', 'KREDIT');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from transaksi;
++--------------+-----------+------------+------------+------------+
+| id_transaksi | id_barang | id_pembeli | tanggal    | keterangan |
++--------------+-----------+------------+------------+------------+
+|            1 |         1 |          1 | 2024-02-02 | LUNAS      |
+|            2 |         2 |          2 | 2024-03-10 | KREDIT     |
+|            3 |         3 |          3 | 2024-03-22 | LUNAS      |
+|            4 |         4 |          4 | 2024-04-21 | LUNAS      |
+|            5 |         5 |          5 | 2024-05-01 | KREDIT     |
++--------------+-----------+------------+------------+------------+
+5 rows in set (0.00 sec)
+
+===================================================================================================================
+mysql> CREATE TABLE detail_transaksi(id_detail_transaksi INT NOT NULL AUTO_INCREMENT PRIMARY KEY, id_transaksi int, 
+id_barang int, jumlah int, harga int, CONSTRAINT fk_transaksi FOREIGN KEY (id_transaksi) REFERENCES transaksi 
+(id_transaksi), CONSTRAINT fk_barang FOREIGN KEY (id_barang) REFERENCES barang (id_barang));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> INSERT INTO detail_transaksi(id_transaksi, id_barang, jumlah, harga) VALUES ('1', '1' , '1', '16000');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO detail_transaksi(id_transaksi, id_barang, jumlah, harga) VALUES ('2', '2' , '1', '20000');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO detail_transaksi(id_transaksi, id_barang, jumlah, harga) VALUES ('3', '3' , '1', '7000');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO detail_transaksi(id_transaksi, id_barang, jumlah, harga) VALUES ('4', '4' , '2', '39000');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO detail_transaksi(id_transaksi, id_barang, jumlah, harga) VALUES ('5', '5' , '5', '70000');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from detail_transaksi;
++---------------------+--------------+-----------+--------+-------+
+| id_detail_transaksi | id_transaksi | id_barang | jumlah | harga |
++---------------------+--------------+-----------+--------+-------+
+|                   1 |            1 |         1 |      1 | 16000 |
+|                   2 |            2 |         2 |      1 | 20000 |
+|                   3 |            3 |         3 |      1 |  7000 |
+|                   4 |            4 |         4 |      2 | 39000 |
+|                   5 |            5 |         5 |      5 | 70000 |
++---------------------+--------------+-----------+--------+-------+
+5 rows in set (0.00 sec)
+
+================================================================================================================
+mysql> CREATE TABLE kwitansi(id_kwitansi INT NOT NULL AUTO_INCREMENT PRIMARY KEY, tanggal_kwitansi date not null);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO kwitansi(tanggal_kwitansi) VALUES ('20240202');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO kwitansi(tanggal_kwitansi) VALUES ('20240310');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO kwitansi(tanggal_kwitansi) VALUES ('20240322');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO kwitansi(tanggal_kwitansi) VALUES ('20240421');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO kwitansi(tanggal_kwitansi) VALUES ('20240501');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from kwitansi;
++-------------+------------------+
+| id_kwitansi | tanggal_kwitansi |
++-------------+------------------+
+|           1 | 2024-02-02       |
+|           2 | 2024-03-10       |
+|           3 | 2024-03-22       |
+|           4 | 2024-04-21       |
+|           5 | 2024-05-01       |
++-------------+------------------+
+5 rows in set (0.00 sec)
+
+===================================================================================================
+mysql> CREATE TABLE faktur(id_faktur INT NOT NULL AUTO_INCREMENT PRIMARY KEY, tanggal_faktur date);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO faktur(tanggal_faktur) VALUES ('20240202');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO faktur(tanggal_faktur) VALUES ('20240310');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO faktur(tanggal_faktur) VALUES ('20240322');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO faktur(tanggal_faktur) VALUES ('20240421');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO faktur(tanggal_faktur) VALUES ('20240501');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from faktur;
++-----------+----------------+
+| id_faktur | tanggal_faktur |
++-----------+----------------+
+|         1 | 2024-02-02     |
+|         2 | 2024-03-10     |
+|         3 | 2024-03-22     |
+|         4 | 2024-04-21     |
+|         5 | 2024-05-01     |
++-----------+----------------+
+5 rows in set (0.00 sec)
+
+============================================================================================
+mysql> SELECT pembeli.id_pembeli, pembeli.nama_pembeli, barang.id_barang, barang.nama_barang 
+FROM pembeli, barang WHERE pembeli.id_pembeli = barang.id_barang;
++------------+-------------------+-----------+-------------+
+| id_pembeli | nama_pembeli      | id_barang | nama_barang |
++------------+-------------------+-----------+-------------+
+|          1 | Silfiana Dwi      |         1 | Beras       |
+|          2 | Bayu Andi         |         2 | Minyak      |
+|          3 | Satria Putra      |         3 | Teh Celup   |
+|          4 | Azmya Putri       |         4 | Susu Kaleng |
+|          5 | Setiawan Syaputra |         5 | Sabun Cair  |
++------------+-------------------+-----------+-------------+
+5 rows in set (0.00 sec)
+
+============================================================================================
+mysql> SELECT pembeli.id_pembeli, pembeli.nama_pembeli, barang.id_barang, barang.nama_barang 
+FROM pembeli INNER JOIN barang ON pembeli.id_pembeli = barang.id_barang;
++------------+-------------------+-----------+-------------+
+| id_pembeli | nama_pembeli      | id_barang | nama_barang |
++------------+-------------------+-----------+-------------+
+|          1 | Silfiana Dwi      |         1 | Beras       |
+|          2 | Bayu Andi         |         2 | Minyak      |
+|          3 | Satria Putra      |         3 | Teh Celup   |
+|          4 | Azmya Putri       |         4 | Susu Kaleng |
+|          5 | Setiawan Syaputra |         5 | Sabun Cair  |
++------------+-------------------+-----------+-------------+
+5 rows in set (0.00 sec)
+
+============================================================================================
+mysql> SELECT pembeli.id_pembeli, pembeli.nama_pembeli, barang.id_barang, barang.nama_barang 
+FROM pembeli LEFT JOIN barang ON pembeli.id_pembeli = barang.id_barang;
++------------+-------------------+-----------+-------------+
+| id_pembeli | nama_pembeli      | id_barang | nama_barang |
++------------+-------------------+-----------+-------------+
+|          1 | Silfiana Dwi      |         1 | Beras       |
+|          2 | Bayu Andi         |         2 | Minyak      |
+|          3 | Satria Putra      |         3 | Teh Celup   |
+|          4 | Azmya Putri       |         4 | Susu Kaleng |
+|          5 | Setiawan Syaputra |         5 | Sabun Cair  |
++------------+-------------------+-----------+-------------+
+5 rows in set (0.00 sec)
+
+============================================================================================
+mysql> SELECT pembeli.id_pembeli, pembeli.nama_pembeli, barang.id_barang, barang.nama_barang 
+FROM pembeli RIGHT JOIN barang ON pembeli.id_pembeli = barang.id_barang;
++------------+-------------------+-----------+-------------+
+| id_pembeli | nama_pembeli      | id_barang | nama_barang |
++------------+-------------------+-----------+-------------+
+|          1 | Silfiana Dwi      |         1 | Beras       |
+|          2 | Bayu Andi         |         2 | Minyak      |
+|          3 | Satria Putra      |         3 | Teh Celup   |
+|          4 | Azmya Putri       |         4 | Susu Kaleng |
+|          5 | Setiawan Syaputra |         5 | Sabun Cair  |
++------------+-------------------+-----------+-------------+
+5 rows in set (0.00 sec)
+
+==================================================================================================
+mysql> SELECT barang.id_barang, transaksi.id_transaksi, barang.nama_barang, detail_transaksi.harga, 
+detail_transaksi.jumlah FROM barang, detail_transaksi, transaksi WHERE barang.id_barang = 
+detail_transaksi.id_barang AND detail_transaksi.id_transaksi = transaksi.id_transaksi AND 
+barang.id_barang = '1';
++-----------+--------------+-------------+-------+--------+
+| id_barang | id_transaksi | nama_barang | harga | jumlah |
++-----------+--------------+-------------+-------+--------+
+|         1 |            1 | Beras       | 16000 |      1 |
++-----------+--------------+-------------+-------+--------+
+1 row in set (0.01 sec)
+
+===================================================================================================
+mysql> SELECT barang.id_barang, transaksi.id_transaksi, barang.nama_barang, detail_transaksi.harga, 
+detail_transaksi.jumlah FROM barang, detail_transaksi, transaksi WHERE barang.id_barang = 
+detail_transaksi.id_barang AND detail_transaksi.id_transaksi = transaksi.id_transaksi AND 
+barang.id_barang = '4';
++-----------+--------------+-------------+-------+--------+
+| id_barang | id_transaksi | nama_barang | harga | jumlah |
++-----------+--------------+-------------+-------+--------+
+|         4 |            4 | Susu Kaleng | 39000 |      2 |
++-----------+--------------+-------------+-------+--------+
+1 row in set (0.00 sec)
+
+
+

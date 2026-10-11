@@ -1,0 +1,34 @@
+clc;
+clear all;
+
+h = [3 1 0.5];
+lh = length(h);
+axis = zeros(1,40);
+hn = [h,axis];
+
+a = 0.8;
+d = a*(rand(1,40));
+
+for i = 1:lh;
+  axis(1,25+i) = h(i);
+ endfor
+ x = 0.5*axis;
+
+y = d + x;
+
+figure;
+subplot(3,1,1);
+plot(d, 'm');
+title ("Sinyal Derau (d[n])");
+axis([1 40]);
+
+subplot(3,1,2);
+plot(x, 'r');
+title("Sinyal yang Diterima (x[n])");
+axis([1 40]);
+
+subplot(3,1,3);
+plot(y, 'g');
+title("Sinyal Hasil Penjumlahan d[n] + x[n] = (y[n])");
+axis ([1 40]);
+

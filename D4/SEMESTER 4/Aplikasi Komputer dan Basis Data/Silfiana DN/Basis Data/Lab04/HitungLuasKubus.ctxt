@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=HitungLuasKubus
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=sisi
+comment2.target=double\ hitungLuasKubus(double)
+numComments=3

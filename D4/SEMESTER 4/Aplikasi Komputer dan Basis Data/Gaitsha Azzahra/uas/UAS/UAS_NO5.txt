@@ -1,0 +1,94 @@
+TITlE  UAS_NO5 ;BX:CL DIKALI CH DISIMPEN SI:DX
+.MODEL SMALL
+.STACK 100H
+.DATA
+DAT DB 0,0,0,0
+HSL DB 0,0,0,0,0
+.CODE 
+MAIN PROC
+     MOV AX, @DATA
+     MOV DS, AX
+     MOV SI, 0
+     MOV DX, 0         
+     CMP CX, 0
+     JZ LUP1     
+     CMP BX, 0
+     JZ LUP1 
+     
+LUP: MOV AL, DL
+     ADD AL, CL
+     CALL SDAA
+     MOV DL, AL
+     
+     MOV AL, DH
+     ADC AL, BL
+     CALL SDAA
+     MOV DH, AL
+     
+     MOV AL, [DAT]
+     ADC AL, BH
+     CALL SDAA
+     MOV [DAT], AL
+     
+     MOV AL, [DAT+1]
+     ADC AL, 0
+     CALL SDAA
+     MOV [DAT+1], AL
+     
+     MOV AL, [DAT]
+     MOV AH, [DAT+1]
+     MOV SI, AX
+     
+     MOV AL, [DAT+2]
+     ADD AL, 1
+     CALL SDAA
+     MOV [DAT+2], AL
+     CMP [DAT+2], CH
+     JNZ LUP  
+     
+LUP1:MOV AH, 4CH
+     INT 21H
+MAIN ENDP    
+SDAA PROC   ; SUBRUTIN SDAA
+    PUSH BX
+    PUSH CX
+    MOV BH,AH
+    LAHF                 
+    MOV BL,AH
+    MOV CH,AL
+    MOV CL,AL                           
+    AND CL, 0FH; CL=SATUAN
+    ;===============
+    TEST AH, 10H       
+    JZ L22
+    ADD AL, 8
+    JNC L22                         
+    ADD AL, 80H
+    OR BL,1        
+L22: TEST AH,1        
+    JZ L33
+    ADD AL,80H
+    OR BL,1                                
+L33: MOV CH,AL
+    AND CH,0FH
+    CMP CH,7
+    JBE L44
+    ADD AL,8
+    JNC L44
+    ADD AL,80H
+    OR BL,1 
+L44: MOV CH,AL
+    AND CH,0F0H
+    CMP CH,70H
+    JBE L55
+    ADD AL,80H
+    OR BL,1   
+L55: MOV AH,BL 
+    SAHF        
+    POP CX
+    POP BX
+    MOV AH,BH  
+    RET
+SDAA ENDP
+
+END MAIN

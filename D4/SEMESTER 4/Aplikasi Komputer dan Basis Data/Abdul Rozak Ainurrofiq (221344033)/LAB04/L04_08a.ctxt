@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=L04_08a
+comment1.params=
+comment1.target=double\ inputAngka()
+comment2.params=n
+comment2.target=double\ pangkat(double)
+comment3.params=args
+comment3.target=void\ main(java.lang.String[])
+numComments=4
