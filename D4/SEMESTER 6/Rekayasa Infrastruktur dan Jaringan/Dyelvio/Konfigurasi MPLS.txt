@@ -1,0 +1,236 @@
+KONFIGURASI MPLS-VPN dengan MP-BGP
+===============================================
+1. Konfigurasi Routing IGP (menggunakan OSPF)
+R1: 
+(config)# hostname R1
+(config)# interface loopback 0
+(config-if)# ip add 1.1.1.1 255.255.255.255
+(config-if)# ip ospf 123 area 0
+
+(config)# interface e0/0
+(config-if)# ip add 12.12.12.1 255.255.255.252
+(config-if)# ip ospf 123 area 0
+(config-if)# no shutdown
+
+R2: 
+(config)# hostname R2
+(config)# interface loopback 0
+(config-if)# ip add 2.2.2.2 255.255.255.255
+(config-if)# ip ospf 123 area 0
+
+(config)# interface e0/1
+(config-if)# ip add 12.12.12.2 255.255.255.252
+(config-if)# ip ospf 123 area 0
+(config-if)# no shutdown
+
+(config)# interface e0/0
+(config-if)# ip add 23.23.23.1 255.255.255.252
+(config-if)# ip ospf 123 area 0
+(config-if)# no shutdown
+
+R3: 
+(config)# hostname R3
+(config)# interface loopback 0
+(config-if)# ip add 3.3.3.3 255.255.255.255
+(config-if)# ip ospf 123 area 0
+
+(config)# interface e0/1
+(config-if)# ip add 23.23.23.2 255.255.255.252
+(config-if)# ip ospf 123 area 0
+(config-if)# no shutdown
+
+Verifikasi:
+# show ip ospf summary
+# show ip ospf neigbor
+# show ip route ospf
+
+R1#ping 3.3.3.3 source lo 0
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 3.3.3.3, timeout is 2 seconds:
+Packet sent with a source address of 1.1.1.1 
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
+R1#
+===============================================
+2. Konfigurasi LDP (Label Distribution Protocol) sebagai Aktifasi Fungsi MPLS Domain
+R1: 
+(config)# router ospf 123
+(config-router)# mpls ldp autoconfig
+
+R2: 
+(config)# router ospf 123
+(config-router)# mpls ldp autoconfig
+
+R3: 
+(config)# router ospf 123
+(config-router)# mpls ldp autoconfig
+
+verifikasi:
+# show mpls interface
+# show mpls ldp neighbor
+
+R1#trace 3.3.3.3 source lo 0
+Type escape sequence to abort.
+Tracing the route to 3.3.3.3
+VRF info: (vrf in name/id, vrf out name/id)
+  1 12.12.12.2 [MPLS: Label 17 Exp 0] 0 msec 1 msec 0 msec
+  2 23.23.23.2 0 msec 1 msec 0 msec
+R1#
+===============================================
+3. Konfigurasi MP-BGP (Multi Protocol - BGP) antar R1 dan R3; 
+R1:
+(config)# router BGP 123
+(config-router)# neighbor 3.3.3.3 remote-as 123
+(config-router)# neighbor 3.3.3.3 update-souce Lo0
+(config-router)# no auto-summary
+
+(config-router)# address-family vpnv4
+(config-router-af)# neighbor 3.3.3.3 activate
+
+R3:
+(config)# router BGP 123
+(config-router)# neighbor 1.1.1.1 remote-as 123
+(config-router)# neighbor 1.1.1.1 update-souce Lo0
+(config-router)# no auto-summary
+
+(config-router)# address-family vpnv4
+(config-router-af)# neighbor 1.1.1.1 activate
+
+verifikasi:
+# show bgp vpnv4 unicast all summary
+===============================================
+4. Koneksikan R1-R4 dan R3-R5
+R1: 
+(config)# interface s2/1
+(config-if)# ip address 41.41.41.2 255.255.255.252
+(config-if)# no shutdown
+
+R4:
+(config)# hostname R4
+(config)# interface loopback 0
+(config-if)# ip address 4.4.4.4 255.255.255.255
+(config-if)# ip ospf 45 area 2
+
+(config)# interface s2/0
+(config-if)# ip address 41.41.41.1 255.255.255.252
+(config-if)# ip ospf 45 area 2
+(config-if)# no shutdown
+
+R3: 
+(config)# interface s2/0
+(config-if)# ip address 35.35.35.1 255.255.255.252
+(config-if)# no shutdown
+
+R5:
+(config)# hostname R5
+(config)# interface loopback 0
+(config-if)# ip address 5.5.5.5 255.255.255.255
+(config-if)# ip ospf 45 area 2
+
+(config)# interface s2/1
+(config-if)# ip address 35.35.35.2 255.255.255.252
+(config-if)# ip ospf 45 area 2
+(config-if)# no shutdown
+
+R1#ping 41.41.41.1
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 41.41.41.1, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 45/45/47 ms
+===============================================
+5. Aktifkan fungsi VRF (Virtual Routing Forwarding) pada R1 & R3 sebagai PE (Provider Edge)
+R1:
+(config)# ip cef 
+(config)# ip vrf RED
+(config-vrf)# rd 45:4     
+(config-vrf)# route-target export 45:4
+(config-vrf)# route-target import 45:5
+
+(config)# interface s2/1  
+(config-if)# ip vrf forwarding RED
+(config-if)# ip address 41.41.41.2 255.255.255.252
+(config-if)# ip ospf 45 area 2
+(config-if)# no shutdown
+
+R3: 
+(config)# ip cef 
+(config)# ip vrf RED
+(config-vrf)# rd 45:5
+(config-vrf)# route-target export 45:5
+(config-vrf)# route-target import 45:4
+
+(config)# interface s2/0
+(config-if)# ip vrf forwarding RED
+(config-if)# ip address 35.35.35.1 255.255.255.252
+(config-if)# ip ospf 45 area 2
+(config-if)# no shutdown
+
+verifikasi:
+# show ip route vrf RED (pada R1 & R3)
+
+R1#ping vrf RED 4.4.4.4
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 4.4.4.4, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 45/45/47 ms
+===============================================
+6. Redistribute OSPF 45 ke BGP-MP 123 dan sebaliknya BGP-MP 123 ke OSPF 45
+
+R1 & R3:
+(config)# router ospf 45
+(config-router)# redistribute bgp 123 subnets
+
+(config)# router bgp 123
+(config-router)# address-family ipv4 vrf RED
+(config-router-af)# redistribute ospf 45
+
+verifikasi routing tabel client: => hanya ada route menuju R4 & R5 (client)
+# show ip route vrf RED (pada R1 & R3) 
+# show ip route   (pada R4 & R5)
+
+verifikasi routing tabel provider: => tidak ada route menuju R4 & R5 (client)
+# show ip route   (pada R1 & R3)
+
+R4 dapat ping ke R5
+R4#ping 5.5.5.5 source 4.4.4.4
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 5.5.5.5, timeout is 2 seconds:
+Packet sent with a source address of 4.4.4.4 
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 87/89/92 ms
+==============================================
+### ERROR OSPF NOT MATCH ###
+BEFORE:
+# show run
+!
+router ospf 45                     ==> perhatikan tidak ada vrf RED
+ redistribute bgp 123 subnets
+
+SOLUSI:
+R1#
+(config)# no router ospf 45
+(config)# interface se2/1
+(config-if)# ip ospf 45 area 2 
+R3#
+(config)# no router ospf 45
+(config)# interface se2/0
+(config-if)# ip ospf 45 area 2 
+
+AFTER:
+# show run
+!
+router ospf 45 vrf RED             ==> perhatikan ada vrf RED
+ redistribute bgp 123 subnets
+
+
+
+
+
+
+
+
+
+
+
+
+

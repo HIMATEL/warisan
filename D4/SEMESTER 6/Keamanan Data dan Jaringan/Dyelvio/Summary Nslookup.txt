@@ -1,0 +1,40 @@
+1) single target
+nmap <ip address>
+nmap 192.168.1.100
+
+2) multiple target
+nmap <ip 1> <ip 2> <ip 3> ....
+nmap 192.168.1.100 192.168.1.150 192.168.1.200
+
+3) range target
+nmap <range IP>
+nmap 192.168.1.0-100
+
+4) entire network
+nmap <ip>/<cidr>
+nmap 192.168.1.1/24
+
+5) Scan list
+nmap -iL <nama file.txt>
+nmap -iL list.txt
+
+6) scan random
+nmap -iR <number target>
+nmap -iR 3
+
+7) menggunakan --exclude (single target)
+nmap 192.168.1.0/24 --exclude 192.168.1.1
+
+8) menggunakan --exclude (multi target)
+nmap 192.168.1.0/24 --exclude 192.168.1.1-100
+
+9) menggunakan --exlucefile (list target)
+nmap 192.168.1.0/24 --excludefile list.txt
+
+10) aggresive scan -A (-OS -SC --traceroute)
+nmap -A 192.168.1.1
+
+11) ipv6 -6 
+nmap -6 fe::00
+
+

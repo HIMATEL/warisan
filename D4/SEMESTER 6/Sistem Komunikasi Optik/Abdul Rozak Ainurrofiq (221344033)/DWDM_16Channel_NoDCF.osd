@@ -1,0 +1,6 @@
+Simulasi DWDM 16 Channel
+Versi OptiSystem: 7
+Jarak antar kanal: 100 GHz (~0.8 nm)
+Jumlah kanal: 16 (1540 - 1552 nm)
+Loop Control: 10x (Fiber 50 km + EDFA)
+Tanpa DCF

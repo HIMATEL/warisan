@@ -1,0 +1,144 @@
+storage ada 2:
+1) permanent => disk
+2) temporal  => RAM
+
+tweak:
+RAM ny kecil, bisa ambil dari Disk
+
+
+LINUX akan memperlakukan semua hal sebagai "file"
+
+
+Basic Command:
+===============
+whoami      => untuk melihat user
+pwd         => lokasi berada
+uname -a    => cek kernel version
+lsb_release -a => cek OS version
+ls          => cek list folder
+ls -l       => dalam mode listing
+ls -al      => dalam mode listing + all
+---------------
+mkdir <nama folder> => membuat folder
+cd <nama folde>     => pindah directory
+cd <nama folder>/<nama folder>/<nama folder> 
+
+cd ..              => pindah directory ke parents folder
+cd ../../../
+
+touch <nama file>  => membuat file
+
+rm <nama file>     => hapus file
+rmdir <nama folder> => hapus folder
+
+rm -r <nama folder> ==> hapus folder yg berisi
+
+maksud dari r adalah fungsi recurvise
+
+clear    ==> untuk membersihkan layar
+
+untuk menulis file:
+nano  <nama file> 
+cara keluar dari nano:
+ctrl+x  ==> exit and save
+
+vi    <nama file> ==> legacy (para senior yg bikin C. C++)
+
+cat  ==> membaca isi file
+head ==> membaca isi file dari atas
+tail ==> membaca isi file dari bawah
+
+-------------------------------
+Modifikasi permision
+ada 2 cara:
+cara pertama: dengan huruf
+chmod <argument> <nama file>  ==> memodifikasi file
+chmod -R <argument> <nama folder>  ==> memodifikasi folder
+-----------------
+chmod +x test.text
+chmod -x test.text
++x , -x
++r , -r
++w , -w
+
+cara kedua: dengan angka
+chmod <argument> <nama file>  ==> memodifikasi file
+chmod -R <argument> <nama folder>  ==> memodifikasi folder
+
+- | r w x | r w x | r w x
+- | 4 2 1 | 4 2 1 | 4 2 1
+contoh: 
+chmod 755 test1.txt
+=======================
+Ganti ownership
+
+chown <user>:<group> <nama file>  ==> untuk file
+chown -R <user>:<group> <nama folder> ==> untuk folder
+
+
+*  ==> asterik ==> dianggap seluruh file
+==============
+
+menjadi superuser (root):
+sudo su
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,19 @@
+basic command linux:
+1) cd => change directory
+2) ls => list (melihat isi dari folder)
+3) mkdir untuk membuat folder
+4) rmdir untuk hapus folder
+5) touch untuk bikin file
+6) cat untuk melihat isi file (dari atas)
+7) tail untuk melihat isi file (dari bawah)
+8) rm untuk hapus file
+9) chmod untuk mengubah permission
+10) chown untuk mengubah owner
+11) nano untuk masuk kedalam file (exit menggunakan ctrl+x)
+
+utilites:
+1) free => untuk melihat memory (bisa gunakan free -m)
+2) df => untuk melihat storage (bisa gunakan df -hT)
+3) ps => untuk melihat system (bisa gunakan ps -aux)
+4) netstat => untuk melihat port (bisa gunakan netstat -tlpn)
+
