@@ -1,0 +1,19 @@
+create database telcom_polban
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
