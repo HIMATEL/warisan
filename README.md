@@ -33,5 +33,7 @@ Materi yang haknya dimiliki atau dapat dilisensikan oleh pengelola repositori in
 - Pengguna boleh mamakai arsip ini untuk kebutuhan referensi, dan dilarang memakai arsip ini untuk plagiarisme atau kecurangan akademik.
 - Penggunaan komersial atau permintaan penghapusan materi harus memperoleh persetujuan tertulis dari pemegang hak/pengelola yang berwenang.
 
+Ini adalah repo untuk upload materi D4
+
 ---
 ### **©️ DEPARTEMEN ILMU PENGETAHUAN DAN TEKNOLOGI HIMATEL POLBAN**
